@@ -26,7 +26,8 @@ public enum ServiceCode implements Serializable {
 	_700ABRV("Attempted Bereavement Follow-up visit", true),
 	_700REC("Chaplain Recert visit", true),
 	_700PRN("Chaplain PRN visit", true),
-	_700MS("Chaplain Funeral/Memorial Service", true);
+	_700MS("Chaplain Funeral/Memorial Service", true),
+	_700PER("Personal Time", false);
 
 	public static final long serialVersionUID = 3294873857389593L;
 
