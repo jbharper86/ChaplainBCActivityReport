@@ -8,17 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ActivityForm {
-    private JComboBox<String> activityCodeBox;
+    private JComboBox activityCodeBox;
     private JTextField patientName;
     private JTextField medicalRecordNumber;
-    private JComboBox<Integer> travelStartHour;
-    private JComboBox<Integer> travelStartMin;
-    private JComboBox<Integer> travelStopHour;
-    private JComboBox<Integer> travelStopMin;
-    private JComboBox<Integer> activityStartHour;
-    private JComboBox<Integer> activityStartMin;
-    private JComboBox<Integer> activityStopHour;
-    private JComboBox<Integer> activityStopMin;
+    private JComboBox travelStartHour;
+    private JComboBox travelStartMin;
+    private JComboBox travelStopHour;
+    private JComboBox travelStopMin;
+    private JComboBox activityStartHour;
+    private JComboBox activityStartMin;
+    private JComboBox activityStopHour;
+    private JComboBox activityStopMin;
     private JTextField odometerStart;
     private JTextField odometerStop;
     private JTextField travelTotalHour;
@@ -28,7 +28,7 @@ public class ActivityForm {
     private JTextField odometerTotal;
     private JPanel activityForm;
 
-    private void createUIComponents() {
+	private void createUIComponents() {
         int maxHour = 24;
         int maxMinute = 60;
         List<Integer> minutes = new ArrayList<Integer>();
@@ -43,16 +43,16 @@ public class ActivityForm {
         Integer[] hoursArray = hours.toArray(new Integer[1]);
         Integer[] minutesArray = minutes.toArray(new Integer[1]);
 
-        activityCodeBox = new JComboBox<String>(ServiceCode.getSortedList());
-        travelStartHour = new JComboBox<Integer>(hoursArray);
-        travelStartMin = new JComboBox<Integer>(minutesArray);
-        travelStopHour = new JComboBox<Integer>(hoursArray);
-        travelStopMin = new JComboBox<Integer>(minutesArray);
+        activityCodeBox = new JComboBox(ServiceCode.getSortedList());
+        travelStartHour = new JComboBox(hoursArray);
+        travelStartMin = new JComboBox(minutesArray);
+        travelStopHour = new JComboBox(hoursArray);
+        travelStopMin = new JComboBox(minutesArray);
 
-        activityStartHour = new JComboBox<Integer>(hoursArray);
-        activityStartMin = new JComboBox<Integer>(minutesArray);
-        activityStopHour = new JComboBox<Integer>(hoursArray);
-        activityStopMin = new JComboBox<Integer>(minutesArray);
+        activityStartHour = new JComboBox(hoursArray);
+        activityStartMin = new JComboBox(minutesArray);
+        activityStopHour = new JComboBox(hoursArray);
+        activityStopMin = new JComboBox(minutesArray);
     }
 
     {

@@ -46,7 +46,7 @@ public enum ServiceCode implements Serializable {
 		String[] serviceCodeArray = new String[serviceCodes.size()];
 		int i=0;
 		for (ServiceCode sc : serviceCodes) {
-			serviceCodeArray[i] = sc.label();
+			serviceCodeArray[i] = sc.labelForDropdown();
 			i++;
 		}
 		return serviceCodeArray;
@@ -65,7 +65,7 @@ public enum ServiceCode implements Serializable {
 		return description;
 	}
 
-	public String label() {
+	public String labelForDropdown() {
 		return code() + " - " + description();
 	}
 
