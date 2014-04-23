@@ -1,13 +1,11 @@
 package data;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
 
 public enum ServiceCode implements Serializable {
 
+	NONE("", false),
 	_900CH("Chaplain Charting", false),
 	_900BRV("Bereavement Charting", false),
 	_901("Travel", false),
@@ -40,6 +38,14 @@ public enum ServiceCode implements Serializable {
 	private final String description;
 	private final boolean showPatientInfo;
 
+	private static Map<String, ServiceCode> codes;
+	static {
+		codes = new HashMap<String, ServiceCode>();
+		for (ServiceCode sc : values()) {
+			codes.put(sc.labelForDropdown(), sc);
+		}
+	}
+
 	public static String[] getSortedList() {
 		List<ServiceCode> serviceCodes = Arrays.asList(values());
 		Collections.sort(serviceCodes);
@@ -50,6 +56,11 @@ public enum ServiceCode implements Serializable {
 			i++;
 		}
 		return serviceCodeArray;
+	}
+
+	public static ServiceCode getCodeForLabel(String label) {
+		ServiceCode sc = codes.get(label);
+		return (sc == null) ? NONE : sc;
 	}
 
 	private ServiceCode(final String description, final boolean showPatientInfo) {
@@ -66,6 +77,9 @@ public enum ServiceCode implements Serializable {
 	}
 
 	public String labelForDropdown() {
+		if (this == NONE) {
+			return "";
+		}
 		return code() + " - " + description();
 	}
 

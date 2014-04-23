@@ -2,14 +2,16 @@ package data;
 
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
+import org.joda.time.Period;
+
 import java.io.Serializable;
 
 public class Activity implements Serializable {
 
 	public static final long serialVersionUID = 84579384573489L;
 
-	private DateTime startTime;
-	private DateTime stopTime;
+	private DateTime activityStartTime;
+	private DateTime activityStopTime;
 	private String patientName;
 	private String medicalRecordNumber;
 	private ServiceCode type;
@@ -19,12 +21,12 @@ public class Activity implements Serializable {
 	private int startMileage;
 	private int stopMileage;
 
-	public DateTime getStartTime() {
-		return startTime;
+	public DateTime getActivityStartTime() {
+		return activityStartTime;
 	}
 
-	public DateTime getStopTime() {
-		return stopTime;
+	public DateTime getActivityStopTime() {
+		return activityStopTime;
 	}
 
 	public DateTime getTravelStart() {
@@ -60,19 +62,19 @@ public class Activity implements Serializable {
 	}
 
 	public Duration getTotalTime() {
-		return new Duration(getStartTime(), getStopTime());
+		return new Duration(getActivityStartTime(), getActivityStopTime());
 	}
 
 	public Duration getTotalTravelTime() {
 		return new Duration(getTravelStart(), getTravelStop());
 	}
 
-	public void setStartTime(final DateTime startTime) {
-		this.startTime = startTime;
+	public void setActivityStartTime(final DateTime activityStartTime) {
+		this.activityStartTime = activityStartTime;
 	}
 
-	public void setFinishTime(final DateTime stopTime) {
-		this.stopTime = stopTime;
+	public void setActivityStopTime(final DateTime activityStopTime) {
+		this.activityStopTime = activityStopTime;
 	}
 
 	public void setTravelStart(final DateTime travelStart) {
