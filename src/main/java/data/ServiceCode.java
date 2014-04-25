@@ -46,9 +46,14 @@ public enum ServiceCode implements Serializable {
 		}
 	}
 
-	public static String[] getSortedList() {
+	public static List<ServiceCode> getSortedCodeList() {
 		List<ServiceCode> serviceCodes = Arrays.asList(values());
 		Collections.sort(serviceCodes);
+		return serviceCodes;
+	}
+
+	public static String[] getSortedLabelArray() {
+		List<ServiceCode> serviceCodes = getSortedCodeList();
 		String[] serviceCodeArray = new String[serviceCodes.size()];
 		int i=0;
 		for (ServiceCode sc : serviceCodes) {

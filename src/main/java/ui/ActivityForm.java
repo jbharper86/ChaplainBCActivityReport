@@ -493,7 +493,7 @@ public class ActivityForm {
 		Integer[] hoursArray = hours.toArray(new Integer[1]);
 		Integer[] minutesArray = minutes.toArray(new Integer[1]);
 
-		activityCodeBox = new JComboBox(ServiceCode.getSortedList());
+		activityCodeBox = new JComboBox(ServiceCode.getSortedLabelArray());
 		travelStartHour = new JComboBox(hoursArray);
 		travelStartMin = new JComboBox(minutesArray);
 		travelStopHour = new JComboBox(hoursArray);
