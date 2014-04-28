@@ -59,4 +59,12 @@ public class FileHelper {
 	public static File getSummaryFile(LocalDate startDate, LocalDate endDate) {
 		return getFile(getSummaryDirectory() + FILENAME_FORMAT.print(startDate) + "_-_" + FILENAME_FORMAT.print(endDate) + ".xlsx");
 	}
+
+	public static File getAgentFile() {
+		return getFile(getDataDirectory() + "agent.dat");
+	}
+
+	public static File getOfficeFile() {
+		return getFile(getDataDirectory() + "office.dat");
+	}
 }

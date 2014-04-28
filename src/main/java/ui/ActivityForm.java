@@ -483,11 +483,11 @@ public class ActivityForm {
 		int maxMinute = 60;
 		List<Integer> minutes = new ArrayList<Integer>();
 		List<Integer> hours = new ArrayList<Integer>();
-		for (int i = 0; i < maxMinute; i++) {
-			if (i < maxHour) {
-				hours.add(i);
+		for (int i = 0; i < maxHour; i++) {
+			if ((i * 5) < maxMinute) {
+				minutes.add(i * 5);
 			}
-			minutes.add(i);
+			hours.add(i);
 		}
 
 		Integer[] hoursArray = hours.toArray(new Integer[1]);
@@ -547,21 +547,21 @@ public class ActivityForm {
 			// Travel Time
 			if (data.getTravelStart() != null) {
 				travelStartHour.setSelectedIndex(data.getTravelStart().hourOfDay().get());
-				travelStartMin.setSelectedIndex(data.getTravelStart().minuteOfHour().get());
+				travelStartMin.setSelectedIndex(data.getTravelStart().minuteOfHour().get() / 5);
 			}
 			if (data.getTravelStop() != null) {
 				travelStopHour.setSelectedIndex(data.getTravelStop().hourOfDay().get());
-				travelStopMin.setSelectedIndex(data.getTravelStop().minuteOfHour().get());
+				travelStopMin.setSelectedIndex(data.getTravelStop().minuteOfHour().get() / 5);
 			}
 
 			// Activity Time
 			if (data.getActivityStartTime() != null) {
 				activityStartHour.setSelectedIndex(data.getActivityStartTime().hourOfDay().get());
-				activityStartMin.setSelectedIndex(data.getActivityStartTime().minuteOfHour().get());
+				activityStartMin.setSelectedIndex(data.getActivityStartTime().minuteOfHour().get() / 5);
 			}
 			if (data.getActivityStopTime() != null) {
 				activityStopHour.setSelectedIndex(data.getActivityStopTime().hourOfDay().get());
-				activityStopMin.setSelectedIndex(data.getActivityStopTime().minuteOfHour().get());
+				activityStopMin.setSelectedIndex(data.getActivityStopTime().minuteOfHour().get() / 5);
 			}
 
 			// Odometer

@@ -2,9 +2,14 @@ package bad;
 
 import data.Activity;
 import data.ActivitySheet;
+import data.Agent;
+import data.Office;
 import helper.ExcelHelper;
 import helper.SerializationHelper;
+import org.joda.time.LocalDate;
 import ui.ActivityForm;
+import ui.AgentDialog;
+import ui.GenerateProductivityReportDialog;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -55,9 +60,11 @@ public class EventHandler {
 		SerializationHelper.serializeActivitySheet(activitySheet);
 	}
 
-	public static void excelExport() {
+	public static void excelExport(LocalDate start, LocalDate end) {
 		save();
-		ExcelHelper.export();
+		Agent agent = SerializationHelper.deserializeAgent();
+		Office office = SerializationHelper.deserializeOffice();
+		ExcelHelper.export(agent, office, start, end);
 	}
 
 	public static void init(JFrame frame) {
@@ -66,5 +73,41 @@ public class EventHandler {
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.PAGE_AXIS));
 		frame.setPreferredSize(new Dimension(400, 200));
 		frame.setMinimumSize(new Dimension(400, 200));
+	}
+
+	public static void checkAgentAndOfficeInfo() {
+		Agent agent = SerializationHelper.deserializeAgent();
+		Office office = SerializationHelper.deserializeOffice();
+
+		if (agent == null || office == null) {
+			displayAgentOfficeDialog(agent, office);
+		}
+	}
+
+	public static void displayAgentOfficeDialog() {
+		Agent agent = SerializationHelper.deserializeAgent();
+		Office office = SerializationHelper.deserializeOffice();
+		displayAgentOfficeDialog(agent, office);
+	}
+
+	private static void displayAgentOfficeDialog(Agent agent, Office office) {
+		AgentDialog dialog = new AgentDialog(EventHandler.frame);
+		dialog.setData(agent, office);
+		dialog.pack();
+		dialog.setVisible(true);
+	}
+
+	public static void displayProductivityReportDialog() {
+		GenerateProductivityReportDialog dialog = new GenerateProductivityReportDialog(EventHandler.frame);
+		dialog.pack();
+		dialog.setVisible(true);
+	}
+
+	public static void saveAgent(Agent agent) {
+		SerializationHelper.serializeAgent(agent);
+	}
+
+	public static void saveOffice(Office office) {
+		SerializationHelper.serializeOffice(office);
 	}
 }

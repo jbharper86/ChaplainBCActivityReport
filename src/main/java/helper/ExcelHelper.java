@@ -1,9 +1,6 @@
 package helper;
 
-import data.Activity;
-import data.ActivitySheet;
-import data.ServiceCode;
-import data.Summary;
+import data.*;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.DataFormat;
 import org.apache.poi.ss.usermodel.Font;
@@ -13,6 +10,8 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.joda.time.Duration;
 import org.joda.time.LocalDate;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.DateTimeFormatterBuilder;
 import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 
@@ -28,13 +27,18 @@ public class ExcelHelper {
 	public static final PeriodFormatter HOUR_MIN_FORMAT = new PeriodFormatterBuilder().printZeroAlways().appendHours().appendLiteral(
 			" HR ").appendMinutes().appendLiteral(" MIN").toFormatter();
 
-	public static void export() {
-		export(new LocalDate(), new LocalDate());
+	public static final DateTimeFormatter MONTH_DAY_YEAR_FORMAT = new DateTimeFormatterBuilder().appendMonthOfYearText().appendLiteral(
+			" ").appendDayOfMonth(1).appendLiteral(", ").appendYear(4, 4).toFormatter();
+	public static final DateTimeFormatter MONTH_YEAR_FORMAT = new DateTimeFormatterBuilder().appendMonthOfYearText().appendLiteral(
+			" ").appendYear(4, 4).toFormatter();
+
+	public static void export(Agent agent, Office office) {
+		export(agent, office, new LocalDate(), new LocalDate());
 	}
 
-	public static void export(LocalDate start, LocalDate end) {
+	public static void export(Agent agent, Office office, LocalDate start, LocalDate end) {
 		Map<ServiceCode, Summary> summaryMap = getSummaryMap(start, end);
-		XSSFWorkbook workbook = getWorkbook(summaryMap);
+		XSSFWorkbook workbook = getWorkbook(agent, office, summaryMap, start, end);
 		File excelFile = FileHelper.getSummaryFile(start, end);
 		try {
 			FileOutputStream out = new FileOutputStream(excelFile);
@@ -48,7 +52,7 @@ public class ExcelHelper {
 	private static Duration getTotalTime(Map<ServiceCode, Summary> summaryMap) {
 		Duration totalTime = new Duration(0L);
 		for (ServiceCode serviceCode : summaryMap.keySet()) {
-			if (serviceCode != ServiceCode._700PER) {
+			if (serviceCode != ServiceCode._600PER) {
 				Summary summary = summaryMap.get(serviceCode);
 				totalTime = totalTime.plus(summary.getTime());
 			}
@@ -56,7 +60,7 @@ public class ExcelHelper {
 		return totalTime;
 	}
 
-	private static XSSFWorkbook getWorkbook(Map<ServiceCode, Summary> summaryMap) {
+	private static XSSFWorkbook getWorkbook(Agent agent, Office office, Map<ServiceCode, Summary> summaryMap, LocalDate start, LocalDate end) {
 		XSSFWorkbook workbook = new XSSFWorkbook();
 		XSSFSheet sheet = workbook.createSheet();
 
@@ -85,22 +89,34 @@ public class ExcelHelper {
 		rightBold.setAlignment(CellStyle.ALIGN_RIGHT);
 		rightBold.setFont(boldFont);
 
+		boolean isMonthlyReport = isMonthlyReport(start, end);
+
 		Row titleRow = sheet.createRow(0);
-		titleRow.createCell(0).setCellValue("MONTHLY PRODUCTIVITY REPORT");
+		Row locationRow = sheet.createRow(1);
+		if (isMonthlyReport) {
+			titleRow.createCell(0).setCellValue("MONTHLY PRODUCTIVITY REPORT");
+			locationRow.createCell(2).setCellValue("Month: " + MONTH_YEAR_FORMAT.print(start));
+		} else {
+			titleRow.createCell(0).setCellValue("PRODUCTIVITY REPORT");
+			if (start.isEqual(end)) {
+				locationRow.createCell(2).setCellValue("Date: " + MONTH_DAY_YEAR_FORMAT.print(start));
+			} else {
+				locationRow.createCell(2).setCellValue(
+						"Dates: " + MONTH_DAY_YEAR_FORMAT.print(start) + " - " + MONTH_DAY_YEAR_FORMAT.print(end));
+			}
+		}
 		titleRow.setRowStyle(centerBold);
 		sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 4));
 
-		Row locationRow = sheet.createRow(1);
-		locationRow.createCell(0).setCellValue("Location: Loudon, TN");
-		locationRow.createCell(2).setCellValue("Month: April 2014");
+		locationRow.createCell(0).setCellValue("Location: " + office.getCity() + ", " + office.getState());
 		locationRow.getCell(0).setCellStyle(bold);
 		locationRow.getCell(2).setCellStyle(rightBold);
 		sheet.addMergedRegion(new CellRangeAddress(1, 1, 0, 1));
 		sheet.addMergedRegion(new CellRangeAddress(1, 1, 2, 4));
 
 		Row agentRow = sheet.createRow(2);
-		agentRow.createCell(0).setCellValue("Agent Name: Greg Harper");
-		agentRow.createCell(2).setCellValue("Job Title: Chaplain");
+		agentRow.createCell(0).setCellValue("Agent: " + agent.getNameAndId());
+		agentRow.createCell(2).setCellValue("Job Title: " + agent.getJobTitle());
 		agentRow.getCell(0).setCellStyle(bold);
 		agentRow.getCell(2).setCellStyle(rightBold);
 		sheet.addMergedRegion(new CellRangeAddress(2, 2, 0, 1));
@@ -135,7 +151,7 @@ public class ExcelHelper {
 				}
 				row.createCell(3).setCellValue(HOUR_MIN_FORMAT.print(summary.getTime().toPeriod()));
 
-				if (serviceCode == ServiceCode._700PER) {
+				if (serviceCode == ServiceCode._600PER) {
 					row.createCell(4).setCellValue(0d);
 					row.getCell(4).setCellStyle(number2D);
 				} else {
@@ -161,13 +177,12 @@ public class ExcelHelper {
 		sheet.autoSizeColumn(3, true);
 		sheet.autoSizeColumn(4, true);
 
-		//		workbook.setPrintArea(0,0,4,0,rowNum);
-		//		PrintSetup ps = sheet.getPrintSetup();
-		//		sheet.setAutobreaks(true);
-		//		ps.setFitHeight((short) 1);
-		//		ps.setFitWidth((short) 1);
-
 		return workbook;
+	}
+
+	private static boolean isMonthlyReport(LocalDate start, LocalDate end) {
+		return (start.getYear() == end.getYear() && start.getMonthOfYear() == end.getMonthOfYear() && start.getDayOfMonth() == 1 && end.plusDays(
+				1).getDayOfMonth() == 1);
 	}
 
 	private static Map<ServiceCode, Summary> getSummaryMap(LocalDate start, LocalDate end) {

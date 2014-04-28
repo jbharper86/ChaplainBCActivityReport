@@ -10,6 +10,11 @@ public class Agent implements Serializable {
 	private String middleName;
 	private String lastName;
 	private String agentId;
+	private String jobTitle;
+
+	public String getNameAndId() {
+		return lastName + ", " + firstName + " " + middleName + " (" + agentId + ")";
+	}
 
 	public String getAgentId() {
 		return agentId;
@@ -27,6 +32,10 @@ public class Agent implements Serializable {
 		return lastName;
 	}
 
+	public String getJobTitle() {
+		return jobTitle;
+	}
+
 	public void setAgentId(final String agentId) {
 		this.agentId = agentId;
 	}
@@ -41,5 +50,9 @@ public class Agent implements Serializable {
 
 	public void setLastName(final String lastName) {
 		this.lastName = lastName;
+	}
+
+	public void setJobTitle(String jobTitle) {
+		this.jobTitle = jobTitle;
 	}
 }

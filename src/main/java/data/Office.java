@@ -8,7 +8,7 @@ public class Office implements Serializable {
 
 	private String city;
 	private String state;
-	private int careCenterNumber;
+	private String careCenterNumber;
 
 	public String getCity() {
 		return city;
@@ -18,7 +18,7 @@ public class Office implements Serializable {
 		return state;
 	}
 
-	public int getCareCenterNumber() {
+	public String getCareCenterNumber() {
 		return careCenterNumber;
 	}
 
@@ -30,7 +30,7 @@ public class Office implements Serializable {
 		this.state = state;
 	}
 
-	public void setCareCenterNumber(final int careCenterNumber) {
+	public void setCareCenterNumber(final String careCenterNumber) {
 		this.careCenterNumber = careCenterNumber;
 	}
 }
