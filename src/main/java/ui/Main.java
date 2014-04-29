@@ -2,10 +2,7 @@ package ui;
 
 import bad.EventHandler;
 import helper.SerializationHelper;
-import listener.AddActivityListener;
-import listener.AgentOfficeInfoListener;
-import listener.ExcelExportListener;
-import listener.SaveListener;
+import listener.*;
 
 import javax.swing.*;
 import java.awt.Dimension;
@@ -19,28 +16,8 @@ public class Main {
 		JFrame frame = new JFrame("Chaplain BC Activity Report");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setPreferredSize(new Dimension(400, 200));
+		createMenuBar(frame);
 
-		// Create the menu bar.
-		JMenuBar menuBar = new JMenuBar();
-		menuBar.setOpaque(true);
-
-		JMenu menu = new JMenu("Options");
-		JMenuItem addItem = new JMenuItem("Add Activity");
-		addItem.addActionListener(new AddActivityListener());
-		JMenuItem agentItem = new JMenuItem("Edit Agent/Office Info");
-		agentItem.addActionListener(new AgentOfficeInfoListener());
-		JMenuItem saveItem = new JMenuItem("Save");
-		saveItem.addActionListener(new SaveListener());
-		JMenuItem exportItem = new JMenuItem("Export Productivity Report");
-		exportItem.addActionListener(new ExcelExportListener());
-		menu.add(addItem);
-		menu.add(agentItem);
-		menu.add(saveItem);
-		menu.add(exportItem);
-		menuBar.add(menu);
-
-		// Set the menu bar and add the label to the content pane.
-		frame.setJMenuBar(menuBar);
 		EventHandler.init(frame);
 
 		EventHandler.loadFromActivitySheet(SerializationHelper.deserializeActivitySheet());
@@ -49,6 +26,36 @@ public class Main {
 		// Display the window.
 		frame.pack();
 		frame.setVisible(true);
+	}
+
+	private static void createMenuBar(JFrame frame) {
+		// Create the menu bar.
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.setOpaque(true);
+
+		JMenu menu = new JMenu("Options");
+		JMenuItem addItem = new JMenuItem("Add Activity");
+		addItem.addActionListener(new AddActivityListener());
+		JMenuItem openItem = new JMenuItem("Open Activity Sheet");
+		openItem.addActionListener(new OpenActivitySheetListener());
+		JMenuItem agentItem = new JMenuItem("Edit Agent/Office Info");
+		agentItem.addActionListener(new AgentOfficeInfoListener());
+		JMenuItem saveItem = new JMenuItem("Save");
+		saveItem.addActionListener(new SaveListener());
+		JMenuItem exportActivitySheetItem = new JMenuItem("Export Activity Sheet");
+		exportActivitySheetItem.addActionListener(new ActivitySheetExportListener());
+		JMenuItem exportItem = new JMenuItem("Export Productivity Report");
+		exportItem.addActionListener(new ProductivityReportExportListener());
+		menu.add(addItem);
+		menu.add(openItem);
+		menu.add(agentItem);
+		menu.add(saveItem);
+		menu.add(exportActivitySheetItem);
+		menu.add(exportItem);
+		menuBar.add(menu);
+
+		// Set the menu bar and add the label to the content pane.
+		frame.setJMenuBar(menuBar);
 	}
 
 	private static void setLookAndFeel() {

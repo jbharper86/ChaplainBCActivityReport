@@ -13,15 +13,14 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.*;
 
-public class GenerateProductivityReportDialog extends JDialog {
+public class OpenActivitySheetDialog extends JDialog {
 	private JPanel contentPane;
 	private JButton buttonOK;
 	private JButton buttonCancel;
-	private JDatePickerImpl startDate;
-	private JDatePickerImpl endDate;
+	private JDatePickerImpl activitySheetDate;
 
-	public GenerateProductivityReportDialog(Frame frame) {
-		super(frame, "Generate Productivity Report", true);
+	public OpenActivitySheetDialog(Frame frame) {
+		super(frame, "Open Activity Sheet", true);
 		$$$setupUI$$$();
 		setContentPane(contentPane);
 		getRootPane().setDefaultButton(buttonOK);
@@ -69,8 +68,8 @@ public class GenerateProductivityReportDialog extends JDialog {
 		panel1.setLayout(new GridBagLayout());
 		GridBagConstraints gbc;
 		gbc = new GridBagConstraints();
-		gbc.gridx = 1;
-		gbc.gridy = 3;
+		gbc.gridx = 0;
+		gbc.gridy = 1;
 		gbc.weightx = 1.0;
 		gbc.anchor = GridBagConstraints.EAST;
 		gbc.fill = GridBagConstraints.VERTICAL;
@@ -104,65 +103,23 @@ public class GenerateProductivityReportDialog extends JDialog {
 		final JPanel panel3 = new JPanel();
 		panel3.setLayout(new GridBagLayout());
 		gbc = new GridBagConstraints();
-		gbc.gridx = 1;
-		gbc.gridy = 1;
+		gbc.gridx = 0;
+		gbc.gridy = 0;
 		gbc.weightx = 1.0;
 		gbc.weighty = 1.0;
 		gbc.fill = GridBagConstraints.BOTH;
 		contentPane.add(panel3, gbc);
 		final JLabel label1 = new JLabel();
-		label1.setText("Start Date");
+		label1.setText("Date");
 		gbc = new GridBagConstraints();
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.anchor = GridBagConstraints.WEST;
 		panel3.add(label1, gbc);
-		startDate.setShowYearButtons(false);
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
 		gbc.gridy = 0;
-		panel3.add(startDate, gbc);
-		final JLabel label2 = new JLabel();
-		label2.setText("End Date");
-		gbc = new GridBagConstraints();
-		gbc.gridx = 0;
-		gbc.gridy = 1;
-		gbc.anchor = GridBagConstraints.WEST;
-		panel3.add(label2, gbc);
-		gbc = new GridBagConstraints();
-		gbc.gridx = 1;
-		gbc.gridy = 1;
-		panel3.add(endDate, gbc);
-		final JPanel spacer1 = new JPanel();
-		gbc = new GridBagConstraints();
-		gbc.gridx = 1;
-		gbc.gridy = 0;
-		gbc.fill = GridBagConstraints.VERTICAL;
-		contentPane.add(spacer1, gbc);
-		final JPanel spacer2 = new JPanel();
-		gbc = new GridBagConstraints();
-		gbc.gridx = 0;
-		gbc.gridy = 1;
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-		contentPane.add(spacer2, gbc);
-		final JPanel spacer3 = new JPanel();
-		gbc = new GridBagConstraints();
-		gbc.gridx = 2;
-		gbc.gridy = 1;
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-		contentPane.add(spacer3, gbc);
-		final JPanel spacer4 = new JPanel();
-		gbc = new GridBagConstraints();
-		gbc.gridx = 1;
-		gbc.gridy = 2;
-		gbc.fill = GridBagConstraints.VERTICAL;
-		contentPane.add(spacer4, gbc);
-		final JPanel spacer5 = new JPanel();
-		gbc = new GridBagConstraints();
-		gbc.gridx = 1;
-		gbc.gridy = 4;
-		gbc.fill = GridBagConstraints.VERTICAL;
-		contentPane.add(spacer5, gbc);
+		panel3.add(activitySheetDate, gbc);
 	}
 
 	/**
@@ -173,32 +130,20 @@ public class GenerateProductivityReportDialog extends JDialog {
 	}
 
 	private void createUIComponents() {
-		UtilDateModel startDateModel = new UtilDateModel();
-		JDatePanelImpl startDatePanel = new JDatePanelImpl(startDateModel);
-		startDate = new JDatePickerImpl(startDatePanel);
-
-		UtilDateModel endDateModel = new UtilDateModel();
-		JDatePanelImpl endDatePanel = new JDatePanelImpl(endDateModel);
-		endDate = new JDatePickerImpl(endDatePanel);
+		UtilDateModel sheetDateModel = new UtilDateModel();
+		JDatePanelImpl sheetDatePanel = new JDatePanelImpl(sheetDateModel);
+		activitySheetDate = new JDatePickerImpl(sheetDatePanel);
 	}
 
 	private void onOK() {
-		DateModel startDateModel = startDate.getModel();
-		DateModel endDateModel = endDate.getModel();
-		LocalDate start = new LocalDate(startDateModel.getYear(), startDateModel.getMonth() + 1, startDateModel.getDay());
-		LocalDate end = new LocalDate(endDateModel.getYear(), endDateModel.getMonth() + 1, endDateModel.getDay());
-		if (!start.isAfter(end)) {
-			EventHandler.productivityReportExport(start, end);
-			dispose();
-		} else {
-			// Create validation error popup
-			JOptionPane.showConfirmDialog(this, "Start date must not be after end date", "Error", JOptionPane.DEFAULT_OPTION,
-					JOptionPane.ERROR_MESSAGE);
-		}
-	}
-
-	private void onCancel() {
+		DateModel sheetDateModel = activitySheetDate.getModel();
+		LocalDate sheetDate = new LocalDate(sheetDateModel.getYear(), sheetDateModel.getMonth() + 1, sheetDateModel.getDay());
+		EventHandler.loadFromActivitySheetDate(sheetDate);
 		dispose();
 	}
 
+	private void onCancel() {
+		// add your code here if necessary
+		dispose();
+	}
 }

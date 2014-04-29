@@ -5,6 +5,7 @@ import data.ServiceCode;
 import org.joda.time.DateTime;
 
 import javax.swing.*;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -54,9 +55,10 @@ public class ActivityForm {
 		activityForm.setAutoscrolls(false);
 		activityForm.setInheritsPopupMenu(true);
 		activityForm.setMaximumSize(new Dimension(40000, 200));
-		activityForm.setMinimumSize(new Dimension(400, 200));
+		activityForm.setMinimumSize(new Dimension(600, 200));
 		activityForm.setOpaque(true);
-		activityForm.setPreferredSize(new Dimension(400, 200));
+		activityForm.setPreferredSize(new Dimension(600, 200));
+		activityForm.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(new Color(-16777216)), null));
 		final JLabel label1 = new JLabel();
 		label1.setText("Patient Name");
 		GridBagConstraints gbc;

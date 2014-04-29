@@ -1,6 +1,9 @@
 package helper;
 
-import data.*;
+import data.Agent;
+import data.Office;
+import data.ServiceCode;
+import data.Summary;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.DataFormat;
 import org.apache.poi.ss.usermodel.Font;
@@ -10,35 +13,20 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.joda.time.Duration;
 import org.joda.time.LocalDate;
-import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.DateTimeFormatterBuilder;
-import org.joda.time.format.PeriodFormatter;
-import org.joda.time.format.PeriodFormatterBuilder;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
-public class ExcelHelper {
+import static util.DateTimeFormats.*;
+
+public class ProductivityReportHelper {
 
 	public static final int SUMMARY_START = 5;
-	public static final PeriodFormatter HOUR_MIN_FORMAT = new PeriodFormatterBuilder().printZeroAlways().appendHours().appendLiteral(
-			" HR ").appendMinutes().appendLiteral(" MIN").toFormatter();
-
-	public static final DateTimeFormatter MONTH_DAY_YEAR_FORMAT = new DateTimeFormatterBuilder().appendMonthOfYearText().appendLiteral(
-			" ").appendDayOfMonth(1).appendLiteral(", ").appendYear(4, 4).toFormatter();
-	public static final DateTimeFormatter MONTH_YEAR_FORMAT = new DateTimeFormatterBuilder().appendMonthOfYearText().appendLiteral(
-			" ").appendYear(4, 4).toFormatter();
-
-	public static void export(Agent agent, Office office) {
-		export(agent, office, new LocalDate(), new LocalDate());
-	}
 
 	public static void export(Agent agent, Office office, LocalDate start, LocalDate end) {
-		Map<ServiceCode, Summary> summaryMap = getSummaryMap(start, end);
-		XSSFWorkbook workbook = getWorkbook(agent, office, summaryMap, start, end);
+		XSSFWorkbook workbook = getWorkbook(agent, office, start, end);
 		File excelFile = FileHelper.getSummaryFile(start, end);
 		try {
 			FileOutputStream out = new FileOutputStream(excelFile);
@@ -60,7 +48,14 @@ public class ExcelHelper {
 		return totalTime;
 	}
 
-	private static XSSFWorkbook getWorkbook(Agent agent, Office office, Map<ServiceCode, Summary> summaryMap, LocalDate start, LocalDate end) {
+	private static boolean isMonthlyReport(LocalDate start, LocalDate end) {
+		return (start.getYear() == end.getYear() && start.getMonthOfYear() == end.getMonthOfYear() && start.getDayOfMonth() == 1 && end.plusDays(
+				1).getDayOfMonth() == 1);
+	}
+
+	private static XSSFWorkbook getWorkbook(Agent agent, Office office, LocalDate start, LocalDate end) {
+		Map<ServiceCode, Summary> summaryMap = SummaryHelper.getSummaryMap(start, end);
+
 		XSSFWorkbook workbook = new XSSFWorkbook();
 		XSSFSheet sheet = workbook.createSheet();
 
@@ -149,7 +144,7 @@ public class ExcelHelper {
 				} else {
 					row.createCell(2).setCellValue(summary.getOccurrences() + " occurrences");
 				}
-				row.createCell(3).setCellValue(HOUR_MIN_FORMAT.print(summary.getTime().toPeriod()));
+				row.createCell(3).setCellValue(HOUR_MIN_PERIOD_FORMAT.print(summary.getTime().toPeriod()));
 
 				if (serviceCode == ServiceCode._600PER) {
 					row.createCell(4).setCellValue(0d);
@@ -166,7 +161,7 @@ public class ExcelHelper {
 
 		Row summaryRow = sheet.createRow(rowNum);
 		summaryRow.createCell(2).setCellValue("TOTALS:");
-		summaryRow.createCell(3).setCellValue(HOUR_MIN_FORMAT.print(totalTime.toPeriod()));
+		summaryRow.createCell(3).setCellValue(HOUR_MIN_PERIOD_FORMAT.print(totalTime.toPeriod()));
 		summaryRow.createCell(4).setCellFormula("SUM(E" + (SUMMARY_START + 1) + ":E" + rowNum + ")");
 		summaryRow.getCell(4).setCellStyle(number2D);
 		summaryRow.setRowStyle(bold);
@@ -179,49 +174,4 @@ public class ExcelHelper {
 
 		return workbook;
 	}
-
-	private static boolean isMonthlyReport(LocalDate start, LocalDate end) {
-		return (start.getYear() == end.getYear() && start.getMonthOfYear() == end.getMonthOfYear() && start.getDayOfMonth() == 1 && end.plusDays(
-				1).getDayOfMonth() == 1);
-	}
-
-	private static Map<ServiceCode, Summary> getSummaryMap(LocalDate start, LocalDate end) {
-		Map<ServiceCode, Summary> summaryMap = new HashMap<ServiceCode, Summary>();
-		LocalDate curr = start;
-		while (curr.isEqual(end) || curr.isBefore(end)) {
-			ActivitySheet activitySheet = SerializationHelper.deserializeActivitySheet(curr);
-			if (activitySheet != null && activitySheet.getActivities() != null) {
-				for (Activity activity : activitySheet.getActivities()) {
-					Summary summary = summaryMap.get(activity.getType());
-					if (summary == null) {
-						summary = new Summary();
-						summary.setServiceCode(activity.getType());
-					}
-
-					Duration activityTime = activity.getTotalTime();
-					summary.addTime(activityTime);
-					summary.incrementOccurrences();
-
-					Duration travelTime = activity.getTotalTravelTime();
-					if (travelTime.toStandardSeconds().getSeconds() > 0) {
-						Summary travelSummary = summaryMap.get(ServiceCode._901);
-						if (travelSummary == null) {
-							travelSummary = new Summary();
-							travelSummary.setServiceCode(ServiceCode._901);
-						}
-
-						travelSummary.addTime(travelTime);
-						travelSummary.addMiles(activity.getTotalMiles());
-						summaryMap.put(travelSummary.getServiceCode(), travelSummary);
-					} else if (activity.getType() == ServiceCode._901) {
-						summary.addMiles(activity.getTotalMiles());
-					}
-					summaryMap.put(summary.getServiceCode(), summary);
-				}
-			}
-			curr = curr.plusDays(1);
-		}
-		return summaryMap;
-	}
-
 }

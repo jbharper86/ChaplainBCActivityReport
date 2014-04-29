@@ -3,15 +3,13 @@ package helper;
 import data.ActivitySheet;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 
 import java.io.File;
 import java.io.IOException;
 
-public class FileHelper {
+import static util.DateTimeFormats.YEAR_MONTH_DAY_FORMAT;
 
-	private static final DateTimeFormatter FILENAME_FORMAT = DateTimeFormat.forPattern("yyyy_MM_dd");
+public class FileHelper {
 
 	public static String getApplicationDirectory() {
 		return System.getProperty("user.home") + File.separator + ".activitySheet" + File.separator;
@@ -41,7 +39,7 @@ public class FileHelper {
 	}
 
 	public static File getActivityFile(LocalDate date) {
-		return getFile(getDataDirectory() + FILENAME_FORMAT.print(date) + ".dat");
+		return getFile(getDataDirectory() + YEAR_MONTH_DAY_FORMAT.print(date) + ".dat");
 	}
 
 	private static File getFile(String filename) {
@@ -57,7 +55,7 @@ public class FileHelper {
 	}
 
 	public static File getSummaryFile(LocalDate startDate, LocalDate endDate) {
-		return getFile(getSummaryDirectory() + FILENAME_FORMAT.print(startDate) + "_-_" + FILENAME_FORMAT.print(endDate) + ".xlsx");
+		return getFile(getSummaryDirectory() + "Summary_" + YEAR_MONTH_DAY_FORMAT.print(startDate) + "_-_" + YEAR_MONTH_DAY_FORMAT.print(endDate) + ".xlsx");
 	}
 
 	public static File getAgentFile() {
@@ -66,5 +64,9 @@ public class FileHelper {
 
 	public static File getOfficeFile() {
 		return getFile(getDataDirectory() + "office.dat");
+	}
+
+	public static File getActivitySheetReportFile(ActivitySheet activitySheet) {
+		return getFile(getSummaryDirectory() + "ActivitySheet_" + YEAR_MONTH_DAY_FORMAT.print(activitySheet.getDate()) + ".xlsx");
 	}
 }

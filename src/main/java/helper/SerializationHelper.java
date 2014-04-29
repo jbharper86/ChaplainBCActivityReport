@@ -67,7 +67,22 @@ public class SerializationHelper {
 	}
 
 	public static ActivitySheet deserializeActivitySheet(LocalDate date) {
-		return deserialize(FileHelper.getActivityFile(date));
+		ActivitySheet activitySheet = deserialize(FileHelper.getActivityFile(date));
+		if (activitySheet == null) {
+			activitySheet = new ActivitySheet();
+		}
+		activitySheet.setDate(date);
+		loadAgentOfficeInfo(activitySheet);
+		return activitySheet;
+	}
+
+	private static void loadAgentOfficeInfo(ActivitySheet activitySheet) {
+		if (activitySheet.getAgent() == null) {
+			activitySheet.setAgent(deserializeAgent());
+		}
+		if (activitySheet.getOffice() == null) {
+			activitySheet.setOffice(deserializeOffice());
+		}
 	}
 
 	public static ActivitySheet deserializeActivitySheet() {
@@ -75,6 +90,7 @@ public class SerializationHelper {
 	}
 
 	public static void serializeActivitySheet(ActivitySheet activitySheet) {
+		loadAgentOfficeInfo(activitySheet);
 		serialize(FileHelper.getActivityFile(activitySheet), activitySheet);
 	}
 

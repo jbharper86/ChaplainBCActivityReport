@@ -4,16 +4,16 @@ import data.Activity;
 import data.ActivitySheet;
 import data.Agent;
 import data.Office;
-import helper.ExcelHelper;
+import helper.ActivitySheetHelper;
+import helper.ProductivityReportHelper;
 import helper.SerializationHelper;
 import org.joda.time.LocalDate;
-import ui.ActivityForm;
-import ui.AgentDialog;
-import ui.GenerateProductivityReportDialog;
+import ui.*;
 
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JSeparator;
+import javax.swing.SwingUtilities;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,13 +22,25 @@ public class EventHandler {
 
 	private static JFrame frame;
 	private static List<ActivityForm> activityForms;
+	private static LocalDate loadedDate;
+
+	public static void loadFromActivitySheetDate(LocalDate activitySheetDate) {
+		loadFromActivitySheet(SerializationHelper.deserializeActivitySheet(activitySheetDate));
+	}
 
 	public static void loadFromActivitySheet(ActivitySheet activitySheet) {
+		frame.getContentPane().removeAll();
+		ActivitySheetHeader header = new ActivitySheetHeader();
+		header.setData(activitySheet);
+		frame.getContentPane().add(header.$$$getRootComponent$$$());
+		frame.getContentPane().add(new JSeparator());
 		if (activitySheet != null && activitySheet.getActivities() != null) {
 			for (Activity activity : activitySheet.getActivities()) {
 				addActivity(activity);
 			}
 		}
+		SwingUtilities.updateComponentTreeUI(frame);
+		EventHandler.loadedDate = activitySheet.getDate();
 	}
 
 	public static void addActivity() {
@@ -37,7 +49,7 @@ public class EventHandler {
 
 	public static void addActivity(Activity activity) {
 		if (!activityForms.isEmpty()) {
-			frame.getContentPane().add(Box.createRigidArea(new Dimension(0, 5)));
+			frame.getContentPane().add(new JSeparator());
 		}
 		ActivityForm form = new ActivityForm();
 		form.setActivity(activity);
@@ -56,15 +68,21 @@ public class EventHandler {
 
 	public static void save() {
 		ActivitySheet activitySheet = new ActivitySheet();
+		activitySheet.setDate(EventHandler.loadedDate);
 		activitySheet.setActivities(getActivities());
 		SerializationHelper.serializeActivitySheet(activitySheet);
 	}
 
-	public static void excelExport(LocalDate start, LocalDate end) {
+	public static void activitySheetExport() {
+		save();
+		ActivitySheetHelper.export(SerializationHelper.deserializeActivitySheet(EventHandler.loadedDate));
+	}
+
+	public static void productivityReportExport(LocalDate start, LocalDate end) {
 		save();
 		Agent agent = SerializationHelper.deserializeAgent();
 		Office office = SerializationHelper.deserializeOffice();
-		ExcelHelper.export(agent, office, start, end);
+		ProductivityReportHelper.export(agent, office, start, end);
 	}
 
 	public static void init(JFrame frame) {
@@ -99,6 +117,12 @@ public class EventHandler {
 
 	public static void displayProductivityReportDialog() {
 		GenerateProductivityReportDialog dialog = new GenerateProductivityReportDialog(EventHandler.frame);
+		dialog.pack();
+		dialog.setVisible(true);
+	}
+
+	public static void displayOpenActivitySheetDialog() {
+		OpenActivitySheetDialog dialog = new OpenActivitySheetDialog(EventHandler.frame);
 		dialog.pack();
 		dialog.setVisible(true);
 	}
