@@ -52,13 +52,14 @@ public class ActivityForm {
 		createUIComponents();
 		activityForm = new JPanel();
 		activityForm.setLayout(new GridBagLayout());
+		activityForm.setAlignmentX(1.0f);
+		activityForm.setAlignmentY(1.0f);
 		activityForm.setAutoscrolls(false);
 		activityForm.setInheritsPopupMenu(true);
 		activityForm.setMaximumSize(new Dimension(40000, 200));
 		activityForm.setMinimumSize(new Dimension(600, 200));
 		activityForm.setOpaque(true);
 		activityForm.setPreferredSize(new Dimension(600, 200));
-		activityForm.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(new Color(-16777216)), null));
 		final JLabel label1 = new JLabel();
 		label1.setText("Patient Name");
 		GridBagConstraints gbc;

@@ -164,9 +164,11 @@ public class ActivitySheetHelper {
 				lastRow.getCell(5).setCellStyle(borderRightAlign);
 				lastRow.getCell(6).setCellStyle(borderStyle);
 
-				totalTime = totalTime.plus(activity.getTotalTime());
-				totalTime = totalTime.plus(activity.getTotalTravelTime());
-				totalMiles += activity.getTotalMiles();
+				if (activity.getType() != ServiceCode._600PER) {
+					totalTime = totalTime.plus(activity.getTotalTime());
+					totalTime = totalTime.plus(activity.getTotalTravelTime());
+					totalMiles += activity.getTotalMiles();
+				}
 			}
 
 		}
@@ -193,10 +195,10 @@ public class ActivitySheetHelper {
 				}
 				summaryRow.createCell(column++).setCellValue(serviceCode.code() + " - ");
 				summaryRow.createCell(column++).setCellValue(HOUR_MIN_PERIOD_FORMAT.print(summary.getTime().toPeriod()));
-				summaryRow.getCell(column-2).setCellStyle(right);
+				summaryRow.getCell(column - 2).setCellStyle(right);
 			}
 		}
-		while (column%7 != 0) {
+		while (column % 7 != 0) {
 			summaryRow.createCell(column++);
 		}
 
@@ -211,7 +213,8 @@ public class ActivitySheetHelper {
 
 		row += 2;
 		Row agentSignatureRow = sheet.createRow(row);
-		agentSignatureRow.createCell(0).setCellValue("Agent Signature: _____________________________________________________________");
+		agentSignatureRow.createCell(0).setCellValue(
+				"Agent Signature: _____________________________________________________________");
 		sheet.addMergedRegion(new CellRangeAddress(row, row, 0, 6));
 		agentSignatureRow.getCell(0).setCellStyle(center);
 

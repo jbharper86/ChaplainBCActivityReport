@@ -10,10 +10,8 @@ import helper.SerializationHelper;
 import org.joda.time.LocalDate;
 import ui.*;
 
-import javax.swing.BoxLayout;
-import javax.swing.JFrame;
-import javax.swing.JSeparator;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +19,8 @@ import java.util.List;
 public class EventHandler {
 
 	private static JFrame frame;
+	private static JPanel contentPanel;
+	private static JPanel headerPanel;
 	private static List<ActivityForm> activityForms;
 	private static LocalDate loadedDate;
 
@@ -29,11 +29,12 @@ public class EventHandler {
 	}
 
 	public static void loadFromActivitySheet(ActivitySheet activitySheet) {
-		frame.getContentPane().removeAll();
+		contentPanel.removeAll();
+		headerPanel.removeAll();
+		activityForms.clear();
 		ActivitySheetHeader header = new ActivitySheetHeader();
 		header.setData(activitySheet);
-		frame.getContentPane().add(header.$$$getRootComponent$$$());
-		frame.getContentPane().add(new JSeparator());
+		headerPanel.add(header.$$$getRootComponent$$$());
 		if (activitySheet != null && activitySheet.getActivities() != null) {
 			for (Activity activity : activitySheet.getActivities()) {
 				addActivity(activity);
@@ -49,13 +50,14 @@ public class EventHandler {
 
 	public static void addActivity(Activity activity) {
 		if (!activityForms.isEmpty()) {
-			frame.getContentPane().add(new JSeparator());
+			JSeparator separator = new JSeparator();
+			separator.setMaximumSize(new Dimension(40000, 2));
+			contentPanel.add(separator);
 		}
 		ActivityForm form = new ActivityForm();
 		form.setActivity(activity);
 		activityForms.add(form);
-		frame.getContentPane().add(form.$$$getRootComponent$$$());
-		frame.pack();
+		contentPanel.add(form.$$$getRootComponent$$$());
 	}
 
 	private static List<Activity> getActivities() {
@@ -88,9 +90,18 @@ public class EventHandler {
 	public static void init(JFrame frame) {
 		EventHandler.frame = frame;
 		EventHandler.activityForms = new ArrayList<ActivityForm>();
+
+		EventHandler.headerPanel = new JPanel();
+		EventHandler.headerPanel.setLayout(new BoxLayout(EventHandler.headerPanel, BoxLayout.PAGE_AXIS));
+		EventHandler.contentPanel = new JPanel();
+		EventHandler.contentPanel.setAutoscrolls(true);
+		EventHandler.contentPanel.setLayout(new BoxLayout(EventHandler.contentPanel, BoxLayout.PAGE_AXIS));
+		JScrollPane scrollPane = new JScrollPane(EventHandler.contentPanel);
+		frame.getContentPane().add(headerPanel);
+		frame.getContentPane().add(scrollPane);
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.PAGE_AXIS));
-		frame.setPreferredSize(new Dimension(400, 200));
-		frame.setMinimumSize(new Dimension(400, 200));
+		frame.setPreferredSize(new Dimension(700, 500));
+		frame.setMinimumSize(new Dimension(700, 500));
 	}
 
 	public static void checkAgentAndOfficeInfo() {
