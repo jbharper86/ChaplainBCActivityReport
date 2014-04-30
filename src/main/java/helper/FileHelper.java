@@ -12,7 +12,7 @@ import static util.DateTimeFormats.YEAR_MONTH_DAY_FORMAT;
 public class FileHelper {
 
 	public static String getApplicationDirectory() {
-		return System.getProperty("user.home") + File.separator + ".activitySheet" + File.separator;
+		return System.getProperty("user.home") + File.separator + "activitySheet" + File.separator;
 	}
 
 	public static String getDataDirectory() {
@@ -54,8 +54,8 @@ public class FileHelper {
 		return file;
 	}
 
-	public static File getSummaryFile(LocalDate startDate, LocalDate endDate) {
-		return getFile(getSummaryDirectory() + "Summary_" + YEAR_MONTH_DAY_FORMAT.print(startDate) + "_-_" + YEAR_MONTH_DAY_FORMAT.print(endDate) + ".xlsx");
+	public static File getProductivityReportFile(LocalDate startDate, LocalDate endDate) {
+		return getFile(getSummaryDirectory() + "ProductivityReport_" + YEAR_MONTH_DAY_FORMAT.print(startDate) + "_-_" + YEAR_MONTH_DAY_FORMAT.print(endDate) + ".xlsx");
 	}
 
 	public static File getAgentFile() {

@@ -3,6 +3,7 @@ package ui;
 import bad.EventHandler;
 import helper.SerializationHelper;
 import listener.*;
+import util.DimensionUtil;
 
 import javax.swing.*;
 import java.awt.Dimension;
@@ -25,6 +26,7 @@ public class Main {
 
 		// Display the window.
 		frame.pack();
+		DimensionUtil.setCenterLocation(frame);
 		frame.setVisible(true);
 	}
 

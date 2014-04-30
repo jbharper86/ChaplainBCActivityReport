@@ -24,7 +24,7 @@ public class ActivitySheetHelper {
 
 	private static final int ACTIVITY_START = 6;
 
-	public static void export(ActivitySheet activitySheet) {
+	public static String export(ActivitySheet activitySheet) {
 		XSSFWorkbook workbook = getWorkbook(activitySheet);
 		File excelFile = FileHelper.getActivitySheetReportFile(activitySheet);
 		try {
@@ -34,6 +34,7 @@ public class ActivitySheetHelper {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return excelFile.getAbsolutePath();
 	}
 
 	private static XSSFWorkbook getWorkbook(ActivitySheet activitySheet) {

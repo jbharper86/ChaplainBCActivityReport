@@ -25,9 +25,9 @@ public class ProductivityReportHelper {
 
 	public static final int SUMMARY_START = 5;
 
-	public static void export(Agent agent, Office office, LocalDate start, LocalDate end) {
+	public static String export(Agent agent, Office office, LocalDate start, LocalDate end) {
 		XSSFWorkbook workbook = getWorkbook(agent, office, start, end);
-		File excelFile = FileHelper.getSummaryFile(start, end);
+		File excelFile = FileHelper.getProductivityReportFile(start, end);
 		try {
 			FileOutputStream out = new FileOutputStream(excelFile);
 			workbook.write(out);
@@ -35,6 +35,7 @@ public class ProductivityReportHelper {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return excelFile.getAbsolutePath();
 	}
 
 	private static Duration getTotalTime(Map<ServiceCode, Summary> summaryMap) {

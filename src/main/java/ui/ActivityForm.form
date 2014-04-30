@@ -20,7 +20,7 @@
     <children>
       <component id="41f1" class="javax.swing.JLabel">
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
           <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
@@ -29,7 +29,7 @@
       </component>
       <component id="16cca" class="javax.swing.JTextField" binding="patientName">
         <constraints>
-          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="252" height="24"/>
           </grid>
           <gridbag weightx="1.0" weighty="0.0"/>
@@ -38,7 +38,7 @@
       </component>
       <component id="a9f38" class="javax.swing.JLabel">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
           <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
@@ -47,194 +47,23 @@
       </component>
       <grid id="30488" layout-manager="GridBagLayout">
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="4" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="5" column="1" row-span="1" col-span="4" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <gridbag weightx="0.0" weighty="1.0"/>
         </constraints>
         <properties/>
         <border type="none"/>
         <children>
-          <component id="3e4a2" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="1.0" weighty="0.0"/>
-            </constraints>
-            <properties>
-              <text value="Travel"/>
-            </properties>
-          </component>
-          <component id="af544" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="1.0" weighty="0.0"/>
-            </constraints>
-            <properties>
-              <text value="Activity Time"/>
-            </properties>
-          </component>
-          <component id="70dd3" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="1.0" weighty="0.0"/>
-            </constraints>
-            <properties>
-              <text value="Odometer"/>
-            </properties>
-          </component>
-          <grid id="d6b20" layout-manager="GridBagLayout">
-            <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="1.0" weighty="1.0"/>
-            </constraints>
-            <properties/>
-            <border type="none"/>
-            <children>
-              <component id="8d20f" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="1.0"/>
-                </constraints>
-                <properties>
-                  <text value="Start"/>
-                </properties>
-              </component>
-              <component id="1c5b8" class="javax.swing.JComboBox" binding="travelStartHour" custom-create="true">
-                <constraints>
-                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="1.0" weighty="1.0"/>
-                </constraints>
-                <properties/>
-              </component>
-              <component id="ac167" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="1.0"/>
-                </constraints>
-                <properties>
-                  <requestFocusEnabled value="true"/>
-                  <text value="hr"/>
-                </properties>
-              </component>
-              <component id="3ec13" class="javax.swing.JComboBox" binding="travelStartMin" custom-create="true">
-                <constraints>
-                  <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="1.0" weighty="1.0"/>
-                </constraints>
-                <properties/>
-              </component>
-              <component id="d143d" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="1.0"/>
-                </constraints>
-                <properties>
-                  <text value="min"/>
-                </properties>
-              </component>
-              <component id="32d77" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="1.0"/>
-                </constraints>
-                <properties>
-                  <text value="Stop"/>
-                </properties>
-              </component>
-              <component id="74d93" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="1.0"/>
-                </constraints>
-                <properties>
-                  <requestFocusEnabled value="true"/>
-                  <text value="hr"/>
-                </properties>
-              </component>
-              <component id="ec9fa" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="1.0"/>
-                </constraints>
-                <properties>
-                  <text value="min"/>
-                </properties>
-              </component>
-              <component id="cbfbc" class="javax.swing.JComboBox" binding="travelStopMin" custom-create="true">
-                <constraints>
-                  <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="1.0" weighty="1.0"/>
-                </constraints>
-                <properties/>
-              </component>
-              <component id="a4158" class="javax.swing.JComboBox" binding="travelStopHour" custom-create="true">
-                <constraints>
-                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="1.0" weighty="1.0"/>
-                </constraints>
-                <properties/>
-              </component>
-              <component id="63868" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="1.0"/>
-                </constraints>
-                <properties>
-                  <text value="Total"/>
-                </properties>
-              </component>
-              <component id="3a6e7" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="1.0"/>
-                </constraints>
-                <properties>
-                  <requestFocusEnabled value="true"/>
-                  <text value="hr"/>
-                </properties>
-              </component>
-              <component id="774ae" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="1.0"/>
-                </constraints>
-                <properties>
-                  <text value="min"/>
-                </properties>
-              </component>
-              <component id="bc67c" class="javax.swing.JTextField" binding="travelTotalHour">
-                <constraints>
-                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                    <preferred-size width="100" height="-1"/>
-                  </grid>
-                  <gridbag weightx="1.0" weighty="1.0"/>
-                </constraints>
-                <properties>
-                  <editable value="false"/>
-                </properties>
-              </component>
-              <component id="7e6cc" class="javax.swing.JTextField" binding="travelTotalMin">
-                <constraints>
-                  <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                    <preferred-size width="100" height="-1"/>
-                  </grid>
-                  <gridbag weightx="1.0" weighty="1.0"/>
-                </constraints>
-                <properties>
-                  <editable value="false"/>
-                </properties>
-              </component>
-            </children>
-          </grid>
           <grid id="9017d" layout-manager="GridBagLayout">
             <constraints>
-              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
               <gridbag weightx="1.0" weighty="1.0"/>
             </constraints>
             <properties/>
-            <border type="none"/>
+            <border type="etched" title="Activity Time" title-position="2"/>
             <children>
               <component id="cf89f" class="javax.swing.JLabel">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="0.0" weighty="1.0"/>
                 </constraints>
                 <properties>
@@ -243,40 +72,40 @@
               </component>
               <component id="c21a9" class="javax.swing.JComboBox" binding="activityStartHour" custom-create="true">
                 <constraints>
-                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="1.0" weighty="1.0"/>
                 </constraints>
                 <properties/>
               </component>
               <component id="f6230" class="javax.swing.JLabel">
                 <constraints>
-                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="0.0" weighty="1.0"/>
                 </constraints>
                 <properties>
                   <requestFocusEnabled value="true"/>
-                  <text value="hr"/>
+                  <text value=" hr"/>
                 </properties>
               </component>
               <component id="1a424" class="javax.swing.JComboBox" binding="activityStartMin" custom-create="true">
                 <constraints>
-                  <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="1.0" weighty="1.0"/>
                 </constraints>
                 <properties/>
               </component>
               <component id="7598e" class="javax.swing.JLabel">
                 <constraints>
-                  <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="0.0" weighty="1.0"/>
                 </constraints>
                 <properties>
-                  <text value="min"/>
+                  <text value=" min"/>
                 </properties>
               </component>
               <component id="67213" class="javax.swing.JLabel">
                 <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="0.0" weighty="1.0"/>
                 </constraints>
                 <properties>
@@ -285,40 +114,40 @@
               </component>
               <component id="e9485" class="javax.swing.JLabel">
                 <constraints>
-                  <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="1.0"/>
-                </constraints>
-                <properties>
-                  <requestFocusEnabled value="true"/>
-                  <text value="hr"/>
-                </properties>
-              </component>
-              <component id="22c7a" class="javax.swing.JLabel">
-                <constraints>
                   <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="0.0" weighty="1.0"/>
                 </constraints>
                 <properties>
-                  <text value="min"/>
+                  <requestFocusEnabled value="true"/>
+                  <text value=" hr"/>
+                </properties>
+              </component>
+              <component id="22c7a" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="1" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="1.0"/>
+                </constraints>
+                <properties>
+                  <text value=" min"/>
                 </properties>
               </component>
               <component id="5afb2" class="javax.swing.JComboBox" binding="activityStopMin" custom-create="true">
                 <constraints>
-                  <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="1.0" weighty="1.0"/>
                 </constraints>
                 <properties/>
               </component>
               <component id="7862b" class="javax.swing.JComboBox" binding="activityStopHour" custom-create="true">
                 <constraints>
-                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="1.0" weighty="1.0"/>
                 </constraints>
                 <properties/>
               </component>
               <component id="fa2f3" class="javax.swing.JLabel">
                 <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="0.0" weighty="1.0"/>
                 </constraints>
                 <properties>
@@ -327,26 +156,26 @@
               </component>
               <component id="a86b6" class="javax.swing.JLabel">
                 <constraints>
-                  <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="1.0"/>
-                </constraints>
-                <properties>
-                  <requestFocusEnabled value="true"/>
-                  <text value="hr"/>
-                </properties>
-              </component>
-              <component id="6fb6e" class="javax.swing.JLabel">
-                <constraints>
                   <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                   <gridbag weightx="0.0" weighty="1.0"/>
                 </constraints>
                 <properties>
-                  <text value="min"/>
+                  <requestFocusEnabled value="true"/>
+                  <text value=" hr"/>
+                </properties>
+              </component>
+              <component id="6fb6e" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="2" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="1.0"/>
+                </constraints>
+                <properties>
+                  <text value=" min"/>
                 </properties>
               </component>
               <component id="d6e95" class="javax.swing.JTextField" binding="activityTotalHour">
                 <constraints>
-                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                  <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="100" height="-1"/>
                   </grid>
                   <gridbag weightx="1.0" weighty="1.0"/>
@@ -357,6 +186,165 @@
               </component>
               <component id="e759c" class="javax.swing.JTextField" binding="activityTotalMin">
                 <constraints>
+                  <grid row="2" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="100" height="-1"/>
+                  </grid>
+                  <gridbag weightx="1.0" weighty="1.0"/>
+                </constraints>
+                <properties>
+                  <editable value="false"/>
+                </properties>
+              </component>
+              <hspacer id="f22da">
+                <constraints>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="0.0"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="6b113">
+                <constraints>
+                  <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="0.0"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="f067a">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="0.0"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="31c45">
+                <constraints>
+                  <grid row="0" column="8" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="0.0"/>
+                </constraints>
+              </hspacer>
+            </children>
+          </grid>
+          <grid id="d6b20" layout-manager="GridBagLayout">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="1.0" weighty="1.0"/>
+            </constraints>
+            <properties/>
+            <border type="etched" title="Travel" title-position="2">
+              <color color="-16777216"/>
+            </border>
+            <children>
+              <component id="8d20f" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="1.0"/>
+                </constraints>
+                <properties>
+                  <text value="Start"/>
+                </properties>
+              </component>
+              <component id="1c5b8" class="javax.swing.JComboBox" binding="travelStartHour" custom-create="true">
+                <constraints>
+                  <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="1.0"/>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="ac167" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="1.0"/>
+                </constraints>
+                <properties>
+                  <requestFocusEnabled value="true"/>
+                  <text value=" hr"/>
+                </properties>
+              </component>
+              <component id="3ec13" class="javax.swing.JComboBox" binding="travelStartMin" custom-create="true">
+                <constraints>
+                  <grid row="0" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="1.0"/>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="d143d" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="1.0"/>
+                </constraints>
+                <properties>
+                  <text value=" min"/>
+                </properties>
+              </component>
+              <component id="32d77" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="1.0"/>
+                </constraints>
+                <properties>
+                  <text value="Stop"/>
+                </properties>
+              </component>
+              <component id="74d93" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="1.0"/>
+                </constraints>
+                <properties>
+                  <requestFocusEnabled value="true"/>
+                  <text value=" hr"/>
+                </properties>
+              </component>
+              <component id="ec9fa" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="1" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="1.0"/>
+                </constraints>
+                <properties>
+                  <text value=" min"/>
+                </properties>
+              </component>
+              <component id="cbfbc" class="javax.swing.JComboBox" binding="travelStopMin" custom-create="true">
+                <constraints>
+                  <grid row="1" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="1.0"/>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="a4158" class="javax.swing.JComboBox" binding="travelStopHour" custom-create="true">
+                <constraints>
+                  <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="1.0" weighty="1.0"/>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="63868" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="1.0"/>
+                </constraints>
+                <properties>
+                  <text value="Total"/>
+                </properties>
+              </component>
+              <component id="3a6e7" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="1.0"/>
+                </constraints>
+                <properties>
+                  <requestFocusEnabled value="true"/>
+                  <text value=" hr"/>
+                </properties>
+              </component>
+              <component id="774ae" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="2" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="1.0"/>
+                </constraints>
+                <properties>
+                  <text value=" min"/>
+                </properties>
+              </component>
+              <component id="bc67c" class="javax.swing.JTextField" binding="travelTotalHour">
+                <constraints>
                   <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="100" height="-1"/>
                   </grid>
@@ -366,64 +354,9 @@
                   <editable value="false"/>
                 </properties>
               </component>
-            </children>
-          </grid>
-          <grid id="743ee" layout-manager="GridBagLayout">
-            <constraints>
-              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-              <gridbag weightx="1.0" weighty="1.0"/>
-            </constraints>
-            <properties/>
-            <border type="none"/>
-            <children>
-              <component id="fa8b4" class="javax.swing.JLabel">
+              <component id="7e6cc" class="javax.swing.JTextField" binding="travelTotalMin">
                 <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="1.0"/>
-                </constraints>
-                <properties>
-                  <text value="Start"/>
-                </properties>
-              </component>
-              <component id="8228f" class="javax.swing.JTextField" binding="odometerStart">
-                <constraints>
-                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                    <preferred-size width="100" height="-1"/>
-                  </grid>
-                  <gridbag weightx="1.0" weighty="1.0"/>
-                </constraints>
-                <properties/>
-              </component>
-              <component id="2a3b" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="1.0"/>
-                </constraints>
-                <properties>
-                  <text value="Stop"/>
-                </properties>
-              </component>
-              <component id="7811c" class="javax.swing.JTextField" binding="odometerStop">
-                <constraints>
-                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                    <preferred-size width="100" height="-1"/>
-                  </grid>
-                  <gridbag weightx="1.0" weighty="1.0"/>
-                </constraints>
-                <properties/>
-              </component>
-              <component id="8748a" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                  <gridbag weightx="0.0" weighty="1.0"/>
-                </constraints>
-                <properties>
-                  <text value="Total"/>
-                </properties>
-              </component>
-              <component id="57bac" class="javax.swing.JTextField" binding="odometerTotal">
-                <constraints>
-                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                  <grid row="2" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="100" height="-1"/>
                   </grid>
                   <gridbag weightx="1.0" weighty="1.0"/>
@@ -432,13 +365,121 @@
                   <editable value="false"/>
                 </properties>
               </component>
+              <hspacer id="4e781">
+                <constraints>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="0.0"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="5bb4c">
+                <constraints>
+                  <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="0.0"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="5c085">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="0.0"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="a0244">
+                <constraints>
+                  <grid row="0" column="8" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="0.0"/>
+                </constraints>
+              </hspacer>
+            </children>
+          </grid>
+          <grid id="743ee" layout-manager="GridBagLayout">
+            <constraints>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="1.0" weighty="1.0"/>
+            </constraints>
+            <properties/>
+            <border type="etched" title="Odometer" title-position="2"/>
+            <children>
+              <component id="fa8b4" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="1.0"/>
+                </constraints>
+                <properties>
+                  <text value="Start"/>
+                </properties>
+              </component>
+              <component id="fc05a" class="javax.swing.JFormattedTextField" binding="odometerStart" custom-create="true">
+                <constraints>
+                  <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="100" height="-1"/>
+                  </grid>
+                  <gridbag weightx="1.0" weighty="1.0"/>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="2a3b" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="1.0"/>
+                </constraints>
+                <properties>
+                  <text value="Stop"/>
+                </properties>
+              </component>
+              <component id="77fdd" class="javax.swing.JFormattedTextField" binding="odometerStop" custom-create="true">
+                <constraints>
+                  <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="100" height="-1"/>
+                  </grid>
+                  <gridbag weightx="1.0" weighty="1.0"/>
+                </constraints>
+                <properties/>
+              </component>
+              <component id="8748a" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="1.0"/>
+                </constraints>
+                <properties>
+                  <text value="Total"/>
+                </properties>
+              </component>
+              <component id="57bac" class="javax.swing.JTextField" binding="odometerTotal">
+                <constraints>
+                  <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                    <preferred-size width="100" height="-1"/>
+                  </grid>
+                  <gridbag weightx="1.0" weighty="1.0"/>
+                </constraints>
+                <properties>
+                  <editable value="false"/>
+                </properties>
+              </component>
+              <hspacer id="8078c">
+                <constraints>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="0.0"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="95d62">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="0.0"/>
+                </constraints>
+              </hspacer>
+              <hspacer id="7066a">
+                <constraints>
+                  <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <gridbag weightx="0.0" weighty="0.0"/>
+                </constraints>
+              </hspacer>
             </children>
           </grid>
         </children>
       </grid>
       <component id="3eb3e" class="javax.swing.JLabel">
         <constraints>
-          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+          <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="59" height="16"/>
           </grid>
           <gridbag weightx="0.0" weighty="0.0"/>
@@ -449,7 +490,7 @@
       </component>
       <component id="e33ca" class="javax.swing.JTextField" binding="medicalRecordNumber">
         <constraints>
-          <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="3" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
           <gridbag weightx="1.0" weighty="0.0"/>
@@ -458,13 +499,49 @@
       </component>
       <component id="8591" class="javax.swing.JComboBox" binding="activityCodeBox" custom-create="true">
         <constraints>
-          <grid row="0" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="2" row-span="1" col-span="3" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
           <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
           <name value="activityCodeBox"/>
         </properties>
       </component>
+      <vspacer id="3bb71">
+        <constraints>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+      </vspacer>
+      <hspacer id="17339">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+      </hspacer>
+      <hspacer id="68780">
+        <constraints>
+          <grid row="3" column="5" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+      </hspacer>
+      <vspacer id="fd627">
+        <constraints>
+          <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+      </vspacer>
+      <vspacer id="3362e">
+        <constraints>
+          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+      </vspacer>
+      <vspacer id="37793">
+        <constraints>
+          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+      </vspacer>
     </children>
   </grid>
 </form>

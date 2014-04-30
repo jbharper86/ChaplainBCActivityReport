@@ -9,9 +9,9 @@ import helper.ProductivityReportHelper;
 import helper.SerializationHelper;
 import org.joda.time.LocalDate;
 import ui.*;
+import util.DimensionUtil;
 
 import javax.swing.*;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +56,7 @@ public class EventHandler {
 		}
 		ActivityForm form = new ActivityForm();
 		form.setActivity(activity);
+		form.addChangeListeners();
 		activityForms.add(form);
 		contentPanel.add(form.$$$getRootComponent$$$());
 	}
@@ -77,14 +78,18 @@ public class EventHandler {
 
 	public static void activitySheetExport() {
 		save();
-		ActivitySheetHelper.export(SerializationHelper.deserializeActivitySheet(EventHandler.loadedDate));
+		String file = ActivitySheetHelper.export(SerializationHelper.deserializeActivitySheet(EventHandler.loadedDate));
+		JOptionPane.showConfirmDialog(EventHandler.frame, "Activity Sheet saved to " + file, "Activity Sheet Export",
+				JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE);
 	}
 
 	public static void productivityReportExport(LocalDate start, LocalDate end) {
 		save();
 		Agent agent = SerializationHelper.deserializeAgent();
 		Office office = SerializationHelper.deserializeOffice();
-		ProductivityReportHelper.export(agent, office, start, end);
+		String file = ProductivityReportHelper.export(agent, office, start, end);
+		JOptionPane.showConfirmDialog(EventHandler.frame, "Productivity Report saved to " + file, "Productivity Report Export",
+				JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE);
 	}
 
 	public static void init(JFrame frame) {
@@ -97,6 +102,7 @@ public class EventHandler {
 		EventHandler.contentPanel.setAutoscrolls(true);
 		EventHandler.contentPanel.setLayout(new BoxLayout(EventHandler.contentPanel, BoxLayout.PAGE_AXIS));
 		JScrollPane scrollPane = new JScrollPane(EventHandler.contentPanel);
+		scrollPane.getVerticalScrollBar().setUnitIncrement(16);
 		frame.getContentPane().add(headerPanel);
 		frame.getContentPane().add(scrollPane);
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.PAGE_AXIS));
@@ -123,18 +129,21 @@ public class EventHandler {
 		AgentDialog dialog = new AgentDialog(EventHandler.frame);
 		dialog.setData(agent, office);
 		dialog.pack();
+		DimensionUtil.setCenterLocation(dialog, EventHandler.frame);
 		dialog.setVisible(true);
 	}
 
 	public static void displayProductivityReportDialog() {
 		GenerateProductivityReportDialog dialog = new GenerateProductivityReportDialog(EventHandler.frame);
 		dialog.pack();
+		DimensionUtil.setCenterLocation(dialog, EventHandler.frame);
 		dialog.setVisible(true);
 	}
 
 	public static void displayOpenActivitySheetDialog() {
 		OpenActivitySheetDialog dialog = new OpenActivitySheetDialog(EventHandler.frame);
 		dialog.pack();
+		DimensionUtil.setCenterLocation(dialog, EventHandler.frame);
 		dialog.setVisible(true);
 	}
 
