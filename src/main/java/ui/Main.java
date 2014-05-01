@@ -21,8 +21,8 @@ public class Main {
 
 		EventHandler.init(frame);
 
-		EventHandler.loadFromActivitySheet(SerializationHelper.deserializeActivitySheet());
 		EventHandler.checkAgentAndOfficeInfo();
+		EventHandler.loadFromActivitySheet(SerializationHelper.deserializeActivitySheet());
 
 		// Display the window.
 		frame.pack();

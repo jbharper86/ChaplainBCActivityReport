@@ -24,6 +24,15 @@ public class EventHandler {
 	private static List<ActivityForm> activityForms;
 	private static LocalDate loadedDate;
 
+	public static boolean isFrameVisible() {
+		return frame.isVisible();
+	}
+
+	public static void reloadActivitySheet() {
+		save();
+		loadFromActivitySheetDate(loadedDate);
+	}
+
 	public static void loadFromActivitySheetDate(LocalDate activitySheetDate) {
 		loadFromActivitySheet(SerializationHelper.deserializeActivitySheet(activitySheetDate));
 	}
@@ -129,7 +138,11 @@ public class EventHandler {
 		AgentDialog dialog = new AgentDialog(EventHandler.frame);
 		dialog.setData(agent, office);
 		dialog.pack();
-		DimensionUtil.setCenterLocation(dialog, EventHandler.frame);
+		if (EventHandler.frame.isShowing()) {
+			DimensionUtil.setCenterLocation(dialog, EventHandler.frame);
+		} else {
+			DimensionUtil.setCenterLocation(dialog);
+		}
 		dialog.setVisible(true);
 	}
 

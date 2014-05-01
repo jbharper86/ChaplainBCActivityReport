@@ -316,6 +316,9 @@ public class AgentDialog extends JDialog {
 		EventHandler.saveAgent(agent);
 		EventHandler.saveOffice(office);
 		dispose();
+		if (EventHandler.isFrameVisible()) {
+			EventHandler.reloadActivitySheet();
+		}
 	}
 
 	public void setData(Agent agent, Office office) {
