@@ -70,7 +70,8 @@ public class ActivitySheetHeader {
 		gbc.anchor = GridBagConstraints.WEST;
 		mainPanel.add(officeLabel, gbc);
 		addActivityButton = new JButton();
-		addActivityButton.setText("+");
+		addActivityButton.setIcon(new ImageIcon(getClass().getResource("/plus.png")));
+		addActivityButton.setText("");
 		gbc = new GridBagConstraints();
 		gbc.gridx = 2;
 		gbc.gridy = 0;

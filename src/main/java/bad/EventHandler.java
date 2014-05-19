@@ -40,23 +40,43 @@ public class EventHandler {
 	}
 
 	public static void loadFromActivitySheet(ActivitySheet activitySheet) {
-		contentPanel.removeAll();
 		headerPanel.removeAll();
-		activityForms.clear();
 		ActivitySheetHeader header = new ActivitySheetHeader();
 		header.setData(activitySheet);
 		headerPanel.add(header.$$$getRootComponent$$$());
-		if (activitySheet != null && activitySheet.getActivities() != null) {
-			for (Activity activity : activitySheet.getActivities()) {
-				addActivity(activity);
-			}
+		if (activitySheet != null) {
+			reloadActivities(activitySheet.getActivities());
 		}
 		SwingUtilities.updateComponentTreeUI(frame);
 		EventHandler.loadedDate = activitySheet.getDate();
 	}
 
+	private static void setButtonsEnabled() {
+		for (ActivityForm form : activityForms) {
+			form.enableUp();
+			form.enableDown();
+		}
+		if (!activityForms.isEmpty()) {
+			activityForms.get(0).disableUp();
+			activityForms.get(activityForms.size() - 1).disableDown();
+		}
+	}
+
+	public static void reloadActivities(List<Activity> activities) {
+		contentPanel.removeAll();
+		activityForms.clear();
+		if (activities != null) {
+			for (Activity activity : activities) {
+				addActivity(activity);
+			}
+		}
+		setButtonsEnabled();
+		SwingUtilities.updateComponentTreeUI(frame);
+	}
+
 	public static void addActivity() {
 		addActivity(new Activity());
+		setButtonsEnabled();
 	}
 
 	public static void addActivity(Activity activity) {
@@ -68,6 +88,7 @@ public class EventHandler {
 		ActivityForm form = new ActivityForm();
 		form.setActivity(activity);
 		form.addChangeListeners();
+		form.setPosition(activityForms.size());
 		activityForms.add(form);
 		contentPanel.add(form.$$$getRootComponent$$$());
 	}
@@ -171,6 +192,23 @@ public class EventHandler {
 			checkAgentAndOfficeInfo();
 			loadFromActivitySheet(SerializationHelper.deserializeActivitySheet());
 		}
+	}
+
+	public static void deleteActivity(int index) {
+		List<Activity> activities = getActivities();
+		if (index >= 0 && index < activities.size()) {
+			activities.remove(index);
+		}
+		reloadActivities(activities);
+	}
+
+	public static void moveActivity(int index, int amount) {
+		List<Activity> activities = getActivities();
+		if (index >= 0 && index < activities.size() && (index+amount) >= 0 && (index+amount) < activities.size()) {
+			Activity activity = activities.remove(index);
+			activities.add(index+amount, activity);
+		}
+		reloadActivities(activities);
 	}
 
 	public static void saveAgent(Agent agent) {
