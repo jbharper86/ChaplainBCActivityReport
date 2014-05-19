@@ -104,8 +104,7 @@ public class ActivityForm {
 		gbc.weighty = 1.0;
 		gbc.fill = GridBagConstraints.BOTH;
 		panel1.add(panel2, gbc);
-		panel2.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Activity Time",
-				TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.TOP));
+		panel2.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Activity Time", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.TOP));
 		final JLabel label3 = new JLabel();
 		label3.setText("Start");
 		gbc = new GridBagConstraints();
@@ -266,10 +265,7 @@ public class ActivityForm {
 		gbc.weighty = 1.0;
 		gbc.fill = GridBagConstraints.BOTH;
 		panel1.add(panel3, gbc);
-		panel3.setBorder(
-				BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Travel", TitledBorder.DEFAULT_JUSTIFICATION,
-						TitledBorder.TOP)
-		);
+		panel3.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Travel", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.TOP));
 		final JLabel label12 = new JLabel();
 		label12.setText("Start");
 		gbc = new GridBagConstraints();
@@ -430,10 +426,7 @@ public class ActivityForm {
 		gbc.weighty = 1.0;
 		gbc.fill = GridBagConstraints.BOTH;
 		panel1.add(panel4, gbc);
-		panel4.setBorder(
-				BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Odometer", TitledBorder.DEFAULT_JUSTIFICATION,
-						TitledBorder.TOP)
-		);
+		panel4.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Odometer", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.TOP));
 		final JLabel label21 = new JLabel();
 		label21.setText("Start");
 		gbc = new GridBagConstraints();

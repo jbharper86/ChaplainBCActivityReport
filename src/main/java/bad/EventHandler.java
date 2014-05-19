@@ -5,6 +5,7 @@ import data.ActivitySheet;
 import data.Agent;
 import data.Office;
 import helper.ActivitySheetHelper;
+import helper.FileHelper;
 import helper.ProductivityReportHelper;
 import helper.SerializationHelper;
 import org.joda.time.LocalDate;
@@ -13,6 +14,7 @@ import util.DimensionUtil;
 
 import javax.swing.*;
 import java.awt.Dimension;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -158,6 +160,17 @@ public class EventHandler {
 		dialog.pack();
 		DimensionUtil.setCenterLocation(dialog, EventHandler.frame);
 		dialog.setVisible(true);
+	}
+
+	public static void displayOpenProfileDialog() {
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		if (fileChooser.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION) {
+			File file = fileChooser.getSelectedFile();
+			FileHelper.setProfilePath(file.getAbsolutePath());
+			checkAgentAndOfficeInfo();
+			loadFromActivitySheet(SerializationHelper.deserializeActivitySheet());
+		}
 	}
 
 	public static void saveAgent(Agent agent) {

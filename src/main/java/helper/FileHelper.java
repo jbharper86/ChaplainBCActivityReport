@@ -11,8 +11,17 @@ import static util.DateTimeFormats.YEAR_MONTH_DAY_FORMAT;
 
 public class FileHelper {
 
-	public static String getApplicationDirectory() {
+	private static String profilePath;
+
+	public static String getDefaultDirectory() {
 		return System.getProperty("user.home") + File.separator + "activitySheet" + File.separator;
+	}
+
+	public static String getApplicationDirectory() {
+		if (profilePath != null) {
+			return profilePath;
+		}
+		return getDefaultDirectory();
 	}
 
 	public static String getDataDirectory() {
@@ -22,7 +31,7 @@ public class FileHelper {
 	}
 
 	public static String getSummaryDirectory() {
-		String dir = getApplicationDirectory() + "summary" + File.separator;
+		String dir = getApplicationDirectory();
 		new File(dir).mkdirs();
 		return dir;
 	}
@@ -68,5 +77,12 @@ public class FileHelper {
 
 	public static File getActivitySheetReportFile(ActivitySheet activitySheet) {
 		return getFile(getSummaryDirectory() + "ActivitySheet_" + YEAR_MONTH_DAY_FORMAT.print(activitySheet.getDate()) + ".xlsx");
+	}
+
+	public static void setProfilePath(String profilePath) {
+		if (profilePath != null && !profilePath.endsWith(File.separator)) {
+			profilePath += File.separator;
+		}
+		FileHelper.profilePath = profilePath;
 	}
 }

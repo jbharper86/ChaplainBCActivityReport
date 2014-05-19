@@ -14,7 +14,7 @@ public class Main {
 		setLookAndFeel();
 
 		// Create and set up the window.
-		JFrame frame = new JFrame("Chaplain BC Activity Report");
+		JFrame frame = new JFrame("Counselor Activity Report");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setPreferredSize(new Dimension(400, 200));
 		createMenuBar(frame);
@@ -42,19 +42,26 @@ public class Main {
 		openItem.addActionListener(new OpenActivitySheetListener());
 		JMenuItem agentItem = new JMenuItem("Edit Agent/Office Info");
 		agentItem.addActionListener(new AgentOfficeInfoListener());
+		JMenuItem profileItem = new JMenuItem("Open Profile");
+		profileItem.addActionListener(new ProfileListener());
 		JMenuItem saveItem = new JMenuItem("Save");
 		saveItem.addActionListener(new SaveListener());
+		menu.add(addItem);
+		menu.add(openItem);
+		menu.add(agentItem);
+		menu.add(profileItem);
+		menu.add(saveItem);
+		menuBar.add(menu);
+
+		JMenu exportMenu = new JMenu("Export");
 		JMenuItem exportActivitySheetItem = new JMenuItem("Export Activity Sheet");
 		exportActivitySheetItem.addActionListener(new ActivitySheetExportListener());
 		JMenuItem exportItem = new JMenuItem("Export Productivity Report");
 		exportItem.addActionListener(new ProductivityReportExportListener());
-		menu.add(addItem);
-		menu.add(openItem);
-		menu.add(agentItem);
-		menu.add(saveItem);
-		menu.add(exportActivitySheetItem);
-		menu.add(exportItem);
-		menuBar.add(menu);
+		exportMenu.add(exportActivitySheetItem);
+		exportMenu.add(exportItem);
+		menuBar.add(exportMenu);
+
 
 		// Set the menu bar and add the label to the content pane.
 		frame.setJMenuBar(menuBar);
