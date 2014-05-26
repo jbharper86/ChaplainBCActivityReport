@@ -4,6 +4,8 @@ import data.Activity;
 import data.ActivitySheet;
 import data.ServiceCode;
 import data.Summary;
+
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.IndexedColors;
@@ -104,7 +106,11 @@ public class ActivitySheetHelper {
 		if (activitySheet != null) {
 			for (Activity activity : activitySheet.getActivities()) {
 				Row activityCodeRow = sheet.createRow(row++);
-				activityCodeRow.createCell(0).setCellValue(activity.getType().labelForDropdown());
+				if (!activity.getType().showPatientInfo() && StringUtils.isNotBlank(activity.getPatientName())) {
+					activityCodeRow.createCell(0).setCellValue(activity.getType().code() + " - " + activity.getPatientName());
+				} else {
+					activityCodeRow.createCell(0).setCellValue(activity.getType().labelForDropdown());
+				}
 				sheet.addMergedRegion(new CellRangeAddress(row - 1, row - 1, 0, 6));
 
 				if (activity.getType().showPatientInfo()) {
@@ -183,6 +189,7 @@ public class ActivitySheetHelper {
 		row3.getCell(5).setCellStyle(right);
 		row3.getCell(6).setCellStyle(right);
 
+		sheet.createRow(row++);
 		Map<ServiceCode, Summary> summaryMap = SummaryHelper.getSummaryMap(activitySheet.getDate(), activitySheet.getDate());
 		int column = 0;
 		Row summaryRow = null;

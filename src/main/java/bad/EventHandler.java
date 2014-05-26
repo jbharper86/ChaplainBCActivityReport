@@ -138,8 +138,8 @@ public class EventHandler {
 		frame.getContentPane().add(headerPanel);
 		frame.getContentPane().add(scrollPane);
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.PAGE_AXIS));
-		frame.setPreferredSize(new Dimension(700, 500));
-		frame.setMinimumSize(new Dimension(700, 500));
+		frame.setPreferredSize(new Dimension(800, 500));
+		frame.setMinimumSize(new Dimension(800, 500));
 	}
 
 	public static void checkAgentAndOfficeInfo() {

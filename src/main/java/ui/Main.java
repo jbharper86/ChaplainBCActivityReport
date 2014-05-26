@@ -16,7 +16,6 @@ public class Main {
 		// Create and set up the window.
 		JFrame frame = new JFrame("Counselor Activity Report");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setPreferredSize(new Dimension(400, 200));
 		createMenuBar(frame);
 
 		EventHandler.init(frame);
@@ -28,6 +27,7 @@ public class Main {
 		frame.pack();
 		DimensionUtil.setCenterLocation(frame);
 		frame.setVisible(true);
+		frame.createBufferStrategy(2);
 	}
 
 	private static void createMenuBar(JFrame frame) {

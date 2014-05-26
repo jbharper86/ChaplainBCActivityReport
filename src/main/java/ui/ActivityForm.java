@@ -3,6 +3,8 @@ package ui;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +20,11 @@ import data.Activity;
 import data.ServiceCode;
 import listener.ActivityFormListener;
 
-public class ActivityForm {
+public class ActivityForm implements ItemListener {
+
+	public static final String PATIENT_CARD = "patientCard";
+	public static final String DESCRIPTION_CARD = "descriptionCard";
+
 	private JComboBox activityCodeBox;
 	private JTextField patientName;
 	private JTextField medicalRecordNumber;
@@ -41,6 +47,8 @@ public class ActivityForm {
 	private JButton xButton;
 	private JButton upButton;
 	private JButton downButton;
+	private JTextField activityDescripiton;
+	private JPanel cardPanel;
 	private Activity activity;
 	private int position;
 
@@ -82,38 +90,23 @@ public class ActivityForm {
 		activityForm.setAutoscrolls(false);
 		activityForm.setInheritsPopupMenu(true);
 		activityForm.setMaximumSize(new Dimension(40000, 200));
-		activityForm.setMinimumSize(new Dimension(600, 200));
+		activityForm.setMinimumSize(new Dimension(700, 200));
 		activityForm.setOpaque(true);
-		activityForm.setPreferredSize(new Dimension(600, 200));
+		activityForm.setPreferredSize(new Dimension(700, 200));
 		final JLabel label1 = new JLabel();
-		label1.setText("Patient Name");
+		label1.setText("Activity Code");
 		GridBagConstraints gbc;
-		gbc = new GridBagConstraints();
-		gbc.gridx = 1;
-		gbc.gridy = 3;
-		gbc.anchor = GridBagConstraints.WEST;
-		activityForm.add(label1, gbc);
-		patientName = new JTextField();
-		gbc = new GridBagConstraints();
-		gbc.gridx = 2;
-		gbc.gridy = 3;
-		gbc.weightx = 1.0;
-		gbc.anchor = GridBagConstraints.WEST;
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-		activityForm.add(patientName, gbc);
-		final JLabel label2 = new JLabel();
-		label2.setText("Activity Code");
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
 		gbc.gridy = 1;
 		gbc.anchor = GridBagConstraints.WEST;
-		activityForm.add(label2, gbc);
+		activityForm.add(label1, gbc);
 		final JPanel panel1 = new JPanel();
 		panel1.setLayout(new GridBagLayout());
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
-		gbc.gridy = 5;
-		gbc.gridwidth = 4;
+		gbc.gridy = 6;
+		gbc.gridwidth = 2;
 		gbc.weighty = 1.0;
 		gbc.fill = GridBagConstraints.BOTH;
 		activityForm.add(panel1, gbc);
@@ -127,14 +120,14 @@ public class ActivityForm {
 		gbc.fill = GridBagConstraints.BOTH;
 		panel1.add(panel2, gbc);
 		panel2.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Activity Time", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.TOP));
-		final JLabel label3 = new JLabel();
-		label3.setText("Start");
+		final JLabel label2 = new JLabel();
+		label2.setText("Start");
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
 		gbc.gridy = 0;
 		gbc.weighty = 1.0;
 		gbc.anchor = GridBagConstraints.WEST;
-		panel2.add(label3, gbc);
+		panel2.add(label2, gbc);
 		gbc = new GridBagConstraints();
 		gbc.gridx = 3;
 		gbc.gridy = 0;
@@ -143,15 +136,15 @@ public class ActivityForm {
 		gbc.anchor = GridBagConstraints.WEST;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		panel2.add(activityStartHour, gbc);
-		final JLabel label4 = new JLabel();
-		label4.setRequestFocusEnabled(true);
-		label4.setText(" hr");
+		final JLabel label3 = new JLabel();
+		label3.setRequestFocusEnabled(true);
+		label3.setText(" hr");
 		gbc = new GridBagConstraints();
 		gbc.gridx = 4;
 		gbc.gridy = 0;
 		gbc.weighty = 1.0;
 		gbc.anchor = GridBagConstraints.WEST;
-		panel2.add(label4, gbc);
+		panel2.add(label3, gbc);
 		gbc = new GridBagConstraints();
 		gbc.gridx = 6;
 		gbc.gridy = 0;
@@ -160,39 +153,39 @@ public class ActivityForm {
 		gbc.anchor = GridBagConstraints.WEST;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		panel2.add(activityStartMin, gbc);
-		final JLabel label5 = new JLabel();
-		label5.setText(" min");
+		final JLabel label4 = new JLabel();
+		label4.setText(" min");
 		gbc = new GridBagConstraints();
 		gbc.gridx = 7;
 		gbc.gridy = 0;
 		gbc.weighty = 1.0;
 		gbc.anchor = GridBagConstraints.WEST;
-		panel2.add(label5, gbc);
-		final JLabel label6 = new JLabel();
-		label6.setText("Stop");
+		panel2.add(label4, gbc);
+		final JLabel label5 = new JLabel();
+		label5.setText("Stop");
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
 		gbc.gridy = 1;
 		gbc.weighty = 1.0;
 		gbc.anchor = GridBagConstraints.WEST;
-		panel2.add(label6, gbc);
-		final JLabel label7 = new JLabel();
-		label7.setRequestFocusEnabled(true);
-		label7.setText(" hr");
+		panel2.add(label5, gbc);
+		final JLabel label6 = new JLabel();
+		label6.setRequestFocusEnabled(true);
+		label6.setText(" hr");
 		gbc = new GridBagConstraints();
 		gbc.gridx = 4;
 		gbc.gridy = 1;
 		gbc.weighty = 1.0;
 		gbc.anchor = GridBagConstraints.WEST;
-		panel2.add(label7, gbc);
-		final JLabel label8 = new JLabel();
-		label8.setText(" min");
+		panel2.add(label6, gbc);
+		final JLabel label7 = new JLabel();
+		label7.setText(" min");
 		gbc = new GridBagConstraints();
 		gbc.gridx = 7;
 		gbc.gridy = 1;
 		gbc.weighty = 1.0;
 		gbc.anchor = GridBagConstraints.WEST;
-		panel2.add(label8, gbc);
+		panel2.add(label7, gbc);
 		gbc = new GridBagConstraints();
 		gbc.gridx = 6;
 		gbc.gridy = 1;
@@ -209,31 +202,31 @@ public class ActivityForm {
 		gbc.anchor = GridBagConstraints.WEST;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		panel2.add(activityStopHour, gbc);
-		final JLabel label9 = new JLabel();
-		label9.setText("Total");
+		final JLabel label8 = new JLabel();
+		label8.setText("Total");
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
 		gbc.gridy = 2;
 		gbc.weighty = 1.0;
 		gbc.anchor = GridBagConstraints.WEST;
-		panel2.add(label9, gbc);
-		final JLabel label10 = new JLabel();
-		label10.setRequestFocusEnabled(true);
-		label10.setText(" hr");
+		panel2.add(label8, gbc);
+		final JLabel label9 = new JLabel();
+		label9.setRequestFocusEnabled(true);
+		label9.setText(" hr");
 		gbc = new GridBagConstraints();
 		gbc.gridx = 4;
 		gbc.gridy = 2;
 		gbc.weighty = 1.0;
 		gbc.anchor = GridBagConstraints.WEST;
-		panel2.add(label10, gbc);
-		final JLabel label11 = new JLabel();
-		label11.setText(" min");
+		panel2.add(label9, gbc);
+		final JLabel label10 = new JLabel();
+		label10.setText(" min");
 		gbc = new GridBagConstraints();
 		gbc.gridx = 7;
 		gbc.gridy = 2;
 		gbc.weighty = 1.0;
 		gbc.anchor = GridBagConstraints.WEST;
-		panel2.add(label11, gbc);
+		panel2.add(label10, gbc);
 		activityTotalHour = new JTextField();
 		activityTotalHour.setEditable(false);
 		gbc = new GridBagConstraints();
@@ -288,14 +281,14 @@ public class ActivityForm {
 		gbc.fill = GridBagConstraints.BOTH;
 		panel1.add(panel3, gbc);
 		panel3.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Travel", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.TOP));
-		final JLabel label12 = new JLabel();
-		label12.setText("Start");
+		final JLabel label11 = new JLabel();
+		label11.setText("Start");
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
 		gbc.gridy = 0;
 		gbc.weighty = 1.0;
 		gbc.anchor = GridBagConstraints.WEST;
-		panel3.add(label12, gbc);
+		panel3.add(label11, gbc);
 		gbc = new GridBagConstraints();
 		gbc.gridx = 3;
 		gbc.gridy = 0;
@@ -304,15 +297,15 @@ public class ActivityForm {
 		gbc.anchor = GridBagConstraints.WEST;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		panel3.add(travelStartHour, gbc);
-		final JLabel label13 = new JLabel();
-		label13.setRequestFocusEnabled(true);
-		label13.setText(" hr");
+		final JLabel label12 = new JLabel();
+		label12.setRequestFocusEnabled(true);
+		label12.setText(" hr");
 		gbc = new GridBagConstraints();
 		gbc.gridx = 4;
 		gbc.gridy = 0;
 		gbc.weighty = 1.0;
 		gbc.anchor = GridBagConstraints.WEST;
-		panel3.add(label13, gbc);
+		panel3.add(label12, gbc);
 		gbc = new GridBagConstraints();
 		gbc.gridx = 6;
 		gbc.gridy = 0;
@@ -321,39 +314,39 @@ public class ActivityForm {
 		gbc.anchor = GridBagConstraints.WEST;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		panel3.add(travelStartMin, gbc);
-		final JLabel label14 = new JLabel();
-		label14.setText(" min");
+		final JLabel label13 = new JLabel();
+		label13.setText(" min");
 		gbc = new GridBagConstraints();
 		gbc.gridx = 7;
 		gbc.gridy = 0;
 		gbc.weighty = 1.0;
 		gbc.anchor = GridBagConstraints.WEST;
-		panel3.add(label14, gbc);
-		final JLabel label15 = new JLabel();
-		label15.setText("Stop");
+		panel3.add(label13, gbc);
+		final JLabel label14 = new JLabel();
+		label14.setText("Stop");
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
 		gbc.gridy = 1;
 		gbc.weighty = 1.0;
 		gbc.anchor = GridBagConstraints.WEST;
-		panel3.add(label15, gbc);
-		final JLabel label16 = new JLabel();
-		label16.setRequestFocusEnabled(true);
-		label16.setText(" hr");
+		panel3.add(label14, gbc);
+		final JLabel label15 = new JLabel();
+		label15.setRequestFocusEnabled(true);
+		label15.setText(" hr");
 		gbc = new GridBagConstraints();
 		gbc.gridx = 4;
 		gbc.gridy = 1;
 		gbc.weighty = 1.0;
 		gbc.anchor = GridBagConstraints.WEST;
-		panel3.add(label16, gbc);
-		final JLabel label17 = new JLabel();
-		label17.setText(" min");
+		panel3.add(label15, gbc);
+		final JLabel label16 = new JLabel();
+		label16.setText(" min");
 		gbc = new GridBagConstraints();
 		gbc.gridx = 7;
 		gbc.gridy = 1;
 		gbc.weighty = 1.0;
 		gbc.anchor = GridBagConstraints.WEST;
-		panel3.add(label17, gbc);
+		panel3.add(label16, gbc);
 		gbc = new GridBagConstraints();
 		gbc.gridx = 6;
 		gbc.gridy = 1;
@@ -370,31 +363,31 @@ public class ActivityForm {
 		gbc.anchor = GridBagConstraints.WEST;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		panel3.add(travelStopHour, gbc);
-		final JLabel label18 = new JLabel();
-		label18.setText("Total");
+		final JLabel label17 = new JLabel();
+		label17.setText("Total");
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
 		gbc.gridy = 2;
 		gbc.weighty = 1.0;
 		gbc.anchor = GridBagConstraints.WEST;
-		panel3.add(label18, gbc);
-		final JLabel label19 = new JLabel();
-		label19.setRequestFocusEnabled(true);
-		label19.setText(" hr");
+		panel3.add(label17, gbc);
+		final JLabel label18 = new JLabel();
+		label18.setRequestFocusEnabled(true);
+		label18.setText(" hr");
 		gbc = new GridBagConstraints();
 		gbc.gridx = 4;
 		gbc.gridy = 2;
 		gbc.weighty = 1.0;
 		gbc.anchor = GridBagConstraints.WEST;
-		panel3.add(label19, gbc);
-		final JLabel label20 = new JLabel();
-		label20.setText(" min");
+		panel3.add(label18, gbc);
+		final JLabel label19 = new JLabel();
+		label19.setText(" min");
 		gbc = new GridBagConstraints();
 		gbc.gridx = 7;
 		gbc.gridy = 2;
 		gbc.weighty = 1.0;
 		gbc.anchor = GridBagConstraints.WEST;
-		panel3.add(label20, gbc);
+		panel3.add(label19, gbc);
 		travelTotalHour = new JTextField();
 		travelTotalHour.setEditable(false);
 		gbc = new GridBagConstraints();
@@ -449,14 +442,14 @@ public class ActivityForm {
 		gbc.fill = GridBagConstraints.BOTH;
 		panel1.add(panel4, gbc);
 		panel4.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Odometer", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.TOP));
-		final JLabel label21 = new JLabel();
-		label21.setText("Start");
+		final JLabel label20 = new JLabel();
+		label20.setText("Start");
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
 		gbc.gridy = 0;
 		gbc.weighty = 1.0;
 		gbc.anchor = GridBagConstraints.WEST;
-		panel4.add(label21, gbc);
+		panel4.add(label20, gbc);
 		gbc = new GridBagConstraints();
 		gbc.gridx = 3;
 		gbc.gridy = 0;
@@ -465,14 +458,14 @@ public class ActivityForm {
 		gbc.anchor = GridBagConstraints.WEST;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		panel4.add(odometerStart, gbc);
-		final JLabel label22 = new JLabel();
-		label22.setText("Stop");
+		final JLabel label21 = new JLabel();
+		label21.setText("Stop");
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
 		gbc.gridy = 1;
 		gbc.weighty = 1.0;
 		gbc.anchor = GridBagConstraints.WEST;
-		panel4.add(label22, gbc);
+		panel4.add(label21, gbc);
 		gbc = new GridBagConstraints();
 		gbc.gridx = 3;
 		gbc.gridy = 1;
@@ -481,14 +474,14 @@ public class ActivityForm {
 		gbc.anchor = GridBagConstraints.WEST;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		panel4.add(odometerStop, gbc);
-		final JLabel label23 = new JLabel();
-		label23.setText("Total");
+		final JLabel label22 = new JLabel();
+		label22.setText("Total");
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
 		gbc.gridy = 2;
 		gbc.weighty = 1.0;
 		gbc.anchor = GridBagConstraints.WEST;
-		panel4.add(label23, gbc);
+		panel4.add(label22, gbc);
 		odometerTotal = new JTextField();
 		odometerTotal.setEditable(false);
 		gbc = new GridBagConstraints();
@@ -517,26 +510,11 @@ public class ActivityForm {
 		gbc.gridy = 0;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		panel4.add(spacer11, gbc);
-		final JLabel label24 = new JLabel();
-		label24.setText("MR #");
-		gbc = new GridBagConstraints();
-		gbc.gridx = 3;
-		gbc.gridy = 3;
-		gbc.anchor = GridBagConstraints.WEST;
-		activityForm.add(label24, gbc);
-		medicalRecordNumber = new JTextField();
-		gbc = new GridBagConstraints();
-		gbc.gridx = 4;
-		gbc.gridy = 3;
-		gbc.weightx = 1.0;
-		gbc.anchor = GridBagConstraints.WEST;
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-		activityForm.add(medicalRecordNumber, gbc);
 		activityCodeBox.setName("activityCodeBox");
 		gbc = new GridBagConstraints();
 		gbc.gridx = 2;
 		gbc.gridy = 1;
-		gbc.gridwidth = 3;
+		gbc.weightx = 0.1;
 		gbc.anchor = GridBagConstraints.WEST;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		activityForm.add(activityCodeBox, gbc);
@@ -549,19 +527,19 @@ public class ActivityForm {
 		final JPanel spacer13 = new JPanel();
 		gbc = new GridBagConstraints();
 		gbc.gridx = 0;
-		gbc.gridy = 3;
+		gbc.gridy = 4;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		activityForm.add(spacer13, gbc);
 		final JPanel spacer14 = new JPanel();
 		gbc = new GridBagConstraints();
-		gbc.gridx = 5;
-		gbc.gridy = 3;
+		gbc.gridx = 3;
+		gbc.gridy = 4;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		activityForm.add(spacer14, gbc);
 		final JPanel spacer15 = new JPanel();
 		gbc = new GridBagConstraints();
 		gbc.gridx = 2;
-		gbc.gridy = 6;
+		gbc.gridy = 7;
 		gbc.fill = GridBagConstraints.VERTICAL;
 		activityForm.add(spacer15, gbc);
 		final JPanel spacer16 = new JPanel();
@@ -573,15 +551,15 @@ public class ActivityForm {
 		final JPanel spacer17 = new JPanel();
 		gbc = new GridBagConstraints();
 		gbc.gridx = 2;
-		gbc.gridy = 4;
+		gbc.gridy = 5;
 		gbc.fill = GridBagConstraints.VERTICAL;
 		activityForm.add(spacer17, gbc);
 		final JPanel panel5 = new JPanel();
 		panel5.setLayout(new GridBagLayout());
 		gbc = new GridBagConstraints();
-		gbc.gridx = 6;
+		gbc.gridx = 4;
 		gbc.gridy = 0;
-		gbc.gridheight = 6;
+		gbc.gridheight = 7;
 		gbc.anchor = GridBagConstraints.NORTH;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		activityForm.add(panel5, gbc);
@@ -621,6 +599,78 @@ public class ActivityForm {
 		gbc.gridy = 1;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		panel5.add(spacer19, gbc);
+		cardPanel = new JPanel();
+		cardPanel.setLayout(new CardLayout(0, 0));
+		gbc = new GridBagConstraints();
+		gbc.gridx = 1;
+		gbc.gridy = 3;
+		gbc.gridwidth = 2;
+		gbc.fill = GridBagConstraints.BOTH;
+		activityForm.add(cardPanel, gbc);
+		final JPanel panel6 = new JPanel();
+		panel6.setLayout(new GridBagLayout());
+		cardPanel.add(panel6, "patientCard");
+		final JLabel label23 = new JLabel();
+		label23.setText("Patient Name");
+		gbc = new GridBagConstraints();
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.anchor = GridBagConstraints.WEST;
+		panel6.add(label23, gbc);
+		patientName = new JTextField();
+		gbc = new GridBagConstraints();
+		gbc.gridx = 1;
+		gbc.gridy = 0;
+		gbc.weightx = 1.0;
+		gbc.anchor = GridBagConstraints.WEST;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		panel6.add(patientName, gbc);
+		final JLabel label24 = new JLabel();
+		label24.setText("MR #");
+		gbc = new GridBagConstraints();
+		gbc.gridx = 3;
+		gbc.gridy = 0;
+		gbc.anchor = GridBagConstraints.WEST;
+		panel6.add(label24, gbc);
+		medicalRecordNumber = new JTextField();
+		gbc = new GridBagConstraints();
+		gbc.gridx = 4;
+		gbc.gridy = 0;
+		gbc.weightx = 1.0;
+		gbc.anchor = GridBagConstraints.WEST;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		panel6.add(medicalRecordNumber, gbc);
+		final JPanel spacer20 = new JPanel();
+		gbc = new GridBagConstraints();
+		gbc.gridx = 2;
+		gbc.gridy = 0;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		panel6.add(spacer20, gbc);
+		final JPanel panel7 = new JPanel();
+		panel7.setLayout(new GridBagLayout());
+		cardPanel.add(panel7, "descriptionCard");
+		final JLabel label25 = new JLabel();
+		label25.setText("Description");
+		gbc = new GridBagConstraints();
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.anchor = GridBagConstraints.WEST;
+		panel7.add(label25, gbc);
+		activityDescripiton = new JTextField();
+		gbc = new GridBagConstraints();
+		gbc.gridx = 2;
+		gbc.gridy = 0;
+		gbc.weightx = 1.0;
+		gbc.weighty = 1.0;
+		gbc.anchor = GridBagConstraints.WEST;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		panel7.add(activityDescripiton, gbc);
+		final JPanel spacer21 = new JPanel();
+		gbc = new GridBagConstraints();
+		gbc.gridx = 1;
+		gbc.gridy = 0;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		panel7.add(spacer21, gbc);
 	}
 
 	/**
@@ -675,6 +725,8 @@ public class ActivityForm {
 
 		odometerStart.addPropertyChangeListener("value", listener);
 		odometerStop.addPropertyChangeListener("value", listener);
+
+		activityCodeBox.addItemListener(this);
 	}
 
 
@@ -689,9 +741,13 @@ public class ActivityForm {
 		String activityLabel = (String) activityCodeBox.getSelectedItem();
 		data.setType(ServiceCode.getCodeForLabel(activityLabel));
 
-		// Patient info
-		data.setPatientName(patientName.getText());
-		data.setMedicalRecordNumber(medicalRecordNumber.getText());
+		if (data.getType().showPatientInfo()) {
+			// Patient info
+			data.setPatientName(patientName.getText());
+			data.setMedicalRecordNumber(medicalRecordNumber.getText());
+		} else {
+			data.setPatientName(activityDescripiton.getText());
+		}
 
 		// Travel Time
 		data.setTravelStart(getDateTime(travelStartHour, travelStartMin));
@@ -714,6 +770,21 @@ public class ActivityForm {
 		}
 	}
 
+	@Override
+	public void itemStateChanged(final ItemEvent e) {
+		ServiceCode serviceCode = ServiceCode.getCodeForLabel((String) e.getItem());
+		showCardPanel(serviceCode);
+	}
+
+	private void showCardPanel(final ServiceCode serviceCode) {
+		CardLayout cardLayout = (CardLayout) cardPanel.getLayout();
+		if (serviceCode != null && serviceCode.showPatientInfo()) {
+			cardLayout.show(cardPanel, PATIENT_CARD);
+		} else {
+			cardLayout.show(cardPanel, DESCRIPTION_CARD);
+		}
+	}
+
 	public void setData(Activity data) {
 		if (activityCodeBox != null) {
 			// Activity code
@@ -724,6 +795,9 @@ public class ActivityForm {
 			// Patient info
 			patientName.setText(data.getPatientName());
 			medicalRecordNumber.setText(data.getMedicalRecordNumber());
+
+			// Activity description (reuse patient name field for now)
+			activityDescripiton.setText(data.getPatientName());
 
 			// Travel Time
 			if (data.getTravelStart() != null) {
@@ -750,6 +824,8 @@ public class ActivityForm {
 			odometerStop.setValue(Integer.valueOf(data.getStopMileage()));
 
 			setTotalFields(data);
+
+			showCardPanel(data.getType());
 		}
 	}
 
