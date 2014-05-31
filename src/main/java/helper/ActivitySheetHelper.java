@@ -74,7 +74,7 @@ public class ActivitySheetHelper {
 		borderRightAlign.setBottomBorderColor(IndexedColors.BLACK.getIndex());
 
 		sheet.createRow(0).createCell(0).setCellValue("Activity Sheet");
-		sheet.createRow(1).createCell(0).setCellValue("Adventa Hospice - " +
+		sheet.createRow(1).createCell(0).setCellValue("Amedisys Hospice - " +
 				activitySheet.getOffice().getCity() + ", " + activitySheet.getOffice().getState() + " - Care Center #" + activitySheet.getOffice().getCareCenterNumber());
 		Row row2 = sheet.createRow(3);
 		Row row3 = sheet.createRow(4);
