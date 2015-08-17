@@ -31,7 +31,7 @@ public class FileHelper {
 	}
 
 	public static String getSummaryDirectory() {
-		String dir = getApplicationDirectory();
+		String dir = getApplicationDirectory() + "summary" + File.separator;
 		new File(dir).mkdirs();
 		return dir;
 	}
