@@ -14,7 +14,7 @@ public class FileHelper {
 	private static String profilePath;
 
 	public static String getDefaultDirectory() {
-		return System.getProperty("user.home") + File.seaparator + "Documents" + File.separator + "activitySheet" + File.separator;
+		return System.getProperty("user.home") + File.separator + "Documents" + File.separator + "activitySheet" + File.separator;
 	}
 
 	public static String getApplicationDirectory() {
