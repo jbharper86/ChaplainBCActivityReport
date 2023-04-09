@@ -74,7 +74,7 @@ public class ActivitySheetHelper {
 		borderRightAlign.setBottomBorderColor(IndexedColors.BLACK.getIndex());
 
 		sheet.createRow(0).createCell(0).setCellValue("Activity Sheet");
-		sheet.createRow(1).createCell(0).setCellValue("Amedisys Hospice - " +
+		sheet.createRow(1).createCell(0).setCellValue("Adoration Hospice - " +
 				activitySheet.getOffice().getCity() + ", " + activitySheet.getOffice().getState() + " - Care Center #" + activitySheet.getOffice().getCareCenterNumber());
 		Row row2 = sheet.createRow(3);
 		Row row3 = sheet.createRow(4);
@@ -171,11 +171,9 @@ public class ActivitySheetHelper {
 				lastRow.getCell(5).setCellStyle(borderRightAlign);
 				lastRow.getCell(6).setCellStyle(borderStyle);
 
-				if (activity.getType() != ServiceCode._600PER) {
-					totalTime = totalTime.plus(activity.getTotalTime());
-					totalTime = totalTime.plus(activity.getTotalTravelTime());
-					totalMiles += activity.getTotalMiles();
-				}
+				totalTime = totalTime.plus(activity.getTotalTime());
+				totalTime = totalTime.plus(activity.getTotalTravelTime());
+				totalMiles += activity.getTotalMiles();
 			}
 
 		}

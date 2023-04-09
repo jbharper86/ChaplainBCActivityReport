@@ -31,16 +31,16 @@ public class SummaryHelper {
 
 					Duration travelTime = activity.getTotalTravelTime();
 					if (travelTime.toStandardSeconds().getSeconds() > 0) {
-						Summary travelSummary = summaryMap.get(ServiceCode._901);
+						Summary travelSummary = summaryMap.get(ServiceCode._BC901);
 						if (travelSummary == null) {
 							travelSummary = new Summary();
-							travelSummary.setServiceCode(ServiceCode._901);
+							travelSummary.setServiceCode(ServiceCode._BC901);
 						}
 
 						travelSummary.addTime(travelTime);
 						travelSummary.addMiles(activity.getTotalMiles());
 						summaryMap.put(travelSummary.getServiceCode(), travelSummary);
-					} else if (activity.getType() == ServiceCode._901) {
+					} else if (activity.getType() == ServiceCode._BC901) {
 						summary.addMiles(activity.getTotalMiles());
 					}
 					summaryMap.put(summary.getServiceCode(), summary);

@@ -41,10 +41,8 @@ public class ProductivityReportHelper {
 	private static Duration getTotalTime(Map<ServiceCode, Summary> summaryMap) {
 		Duration totalTime = new Duration(0L);
 		for (ServiceCode serviceCode : summaryMap.keySet()) {
-			if (serviceCode != ServiceCode._600PER) {
-				Summary summary = summaryMap.get(serviceCode);
-				totalTime = totalTime.plus(summary.getTime());
-			}
+			Summary summary = summaryMap.get(serviceCode);
+			totalTime = totalTime.plus(summary.getTime());
 		}
 		return totalTime;
 	}
@@ -140,22 +138,17 @@ public class ProductivityReportHelper {
 				Row row = sheet.createRow(rowNum);
 				row.createCell(0).setCellValue(serviceCode.code());
 				row.createCell(1).setCellValue(serviceCode.description());
-				if (serviceCode == ServiceCode._901) {
+				if (serviceCode == ServiceCode._BC901) {
 					row.createCell(2).setCellValue(summary.getMiles() + " miles");
 				} else {
 					row.createCell(2).setCellValue(summary.getOccurrences() + " occurrences");
 				}
 				row.createCell(3).setCellValue(HOUR_MIN_PERIOD_FORMAT.print(summary.getTime().toPeriod()));
 
-				if (serviceCode == ServiceCode._600PER) {
-					row.createCell(4).setCellValue(0d);
-					row.getCell(4).setCellStyle(number2D);
-				} else {
-					Double percentTime = (Long.valueOf(summary.getTime().getMillis()).doubleValue() / Long.valueOf(
-							totalTime.getMillis()).doubleValue()) * 100d;
-					row.createCell(4).setCellValue(percentTime);
-					row.getCell(4).setCellStyle(number2D);
-				}
+				Double percentTime = (Long.valueOf(summary.getTime().getMillis()).doubleValue() / Long.valueOf(
+						totalTime.getMillis()).doubleValue()) * 100d;
+				row.createCell(4).setCellValue(percentTime);
+				row.getCell(4).setCellStyle(number2D);
 				rowNum++;
 			}
 		}
